@@ -3,29 +3,36 @@ package com.example.triviaproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.triviaproject.database.entities.trivia;
-import com.example.triviaproject.database.triviaRepository;
+import com.example.triviaproject.database.entities.User;
+import com.example.triviaproject.database.UserRepository;
 import com.example.triviaproject.databinding.ActivityRegisterBinding;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
-    private triviaRepository repository;
+    private UserRepository repository;
     public static final String TAG = "DAC_trivia";
     String uName = "";
     String uPassword = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        repository = triviaRepository.getRepository(getApplication());
-        binding.register.setOnClickListener(new View.OnClickListener(){
+        repository = UserRepository.getRepository(getApplication());
+        binding.accountDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        updateDisplay();
+        binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInfoFromDisplay();
@@ -34,21 +41,33 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private void updateDisplay(){
-        String info = binding.textView.getText().toString();
-        Log.d(TAG, "updateDisplay: ");
-        String newInfo = String.format("Username:%s%nPassword:%s%n",uName,uPassword,info);
-        binding.textView.setText(newInfo);
-        Log.i(TAG,repository.getAllAccs().toString());
+
+    private void updateDisplay() {
+        ArrayList<User> allUsers = repository.getAllAccounts();
+        if (allUsers.isEmpty()) {
+            binding.accountDisplayTextView.setText(R.string.no_accounts_found);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (User user : allUsers) {
+            sb.append(user);
+        }
+        binding.accountDisplayTextView.setText(sb.toString());
     }
-    private void insertAccountInfo(){
-        trivia acc = new trivia(uName,uPassword);
-        repository.insertAccounts(acc);
+
+    private void insertAccountInfo() {
+        if (uName.isEmpty() || uPassword.isEmpty()) {
+            return;
+        }
+        User account = new User(uName, uPassword);
+        repository.insertAccounts(account);
     }
-    public static Intent registerIntentFactory(Context context){
+
+    public static Intent registerIntentFactory(Context context) {
         return new Intent(context, RegisterActivity.class);
     }
-    private void getInfoFromDisplay(){
+
+    private void getInfoFromDisplay() {
         uName = binding.username.getText().toString();
         uPassword = binding.password.getText().toString();
     }

@@ -11,19 +11,21 @@ import com.example.triviaproject.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        binding.login.setOnClickListener(new View.OnClickListener(){
+        binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
     }
-    public static Intent loginIntentFactory (Context context){
+
+    public static Intent loginIntentFactory(Context context) {
         return new Intent(context, LoginActivity.class);
     }
 }

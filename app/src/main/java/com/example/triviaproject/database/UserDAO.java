@@ -5,17 +5,16 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.triviaproject.database.entities.trivia;
+import com.example.triviaproject.database.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Dao
-public interface triviaDAO {
+public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(trivia account);
+    void insert(User account);
 
-    @Query("SELECT * FROM " + triviaDatabase.triviaTable)
-    List<trivia> getAllRecords();
+    @Query("SELECT * FROM " + UserDatabase.triviaTable + " ORDER BY id ASC")
+    List<User> getAllRecords();
 }

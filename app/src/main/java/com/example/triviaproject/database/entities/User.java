@@ -1,39 +1,39 @@
 package com.example.triviaproject.database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.triviaproject.database.triviaDatabase;
+import com.example.triviaproject.database.UserDatabase;
 
 import java.util.Objects;
 
-@Entity(tableName = triviaDatabase.triviaTable)
-public class trivia {
+@Entity(tableName = UserDatabase.triviaTable)
+public class User {
     @PrimaryKey(autoGenerate = true)
 
     private int id;
     private String userName;
     private String password;
 
-    public trivia(String userName, String password) {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "trivia{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "userName: " + userName + '\n' +
+                "password: " + password + '\n' +
+                "=-=-=-=-=-=-=-=\n";
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        trivia trivia = (trivia) o;
+        User trivia = (User) o;
         return id == trivia.id && Objects.equals(userName, trivia.userName) && Objects.equals(password, trivia.password);
     }
 
