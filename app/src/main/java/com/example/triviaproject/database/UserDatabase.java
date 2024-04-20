@@ -35,8 +35,19 @@ public abstract class UserDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Log.i(RegisterActivity.TAG, "database created");
+            // Add default users to the database
+            databaseWriteExecutor.execute(() -> {
+                UserDAO dao = INSTANCE.userDAO();
+                dao.deleteAll();
+                User admin = new User("admin1", "admin1");
+                admin.setAdmin(true);
+                dao.insert(admin);
+
+                User testUser1 = new User("testUser1", "testUser1");
+                dao.insert(testUser1);
+            });
         }
     };
 
-    public abstract UserDAO accountDAO();
+    public abstract UserDAO userDAO();
 }

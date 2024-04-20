@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.database.UserRepository;
+import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityRegisterBinding;
 
 import java.util.ArrayList;
@@ -37,6 +36,13 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getInfoFromDisplay();
                 insertAccountInfo();
+                updateDisplay();
+            }
+        });
+
+        binding.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 updateDisplay();
             }
         });
