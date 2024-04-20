@@ -3,6 +3,7 @@ package com.example.triviaproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.database.UserRepository;
 import com.example.triviaproject.databinding.ActivityRegisterBinding;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
@@ -25,6 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         repository = UserRepository.getRepository(getApplication());
+        binding.accountDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        updateDisplay();
         binding.register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -35,13 +41,21 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
     private void updateDisplay(){
-        String info = binding.textView.getText().toString();
-        Log.d(TAG, "updateDisplay: ");
-        String newInfo = String.format("Username: %s%nPassword: %s%n",uName,uPassword,info);
-        binding.textView.setText(newInfo);
-        Log.i(TAG,repository.getAllAccs().toString());
+        ArrayList<User> allUsers = repository.getAllAccounts();
+        if(allUsers.isEmpty()) {
+            binding.accountDisplayTextView.setText(R.string.no_accounts_found);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (User user : allUsers) {
+            sb.append(user);
+        }
+        binding.accountDisplayTextView.setText(sb.toString());
     }
     private void insertAccountInfo(){
+        if(uName.isEmpty() || uPassword.isEmpty()){
+            return;
+        }
         User account = new User(uName,uPassword);
         repository.insertAccounts(account);
     }

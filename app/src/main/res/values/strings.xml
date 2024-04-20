@@ -16,4 +16,5 @@
     <string name="username">username</string>
     <string name="register">Register</string>
     <string name="accountinput">accountInput</string>
+    <string name="no_accounts_found">No accounts found</string>
 </resources>

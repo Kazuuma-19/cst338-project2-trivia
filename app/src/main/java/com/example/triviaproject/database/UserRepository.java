@@ -39,7 +39,7 @@ public class UserRepository {
         }
         return null;
     }
-    public ArrayList<User> getAllAccs(){
+    public ArrayList<User> getAllAccounts(){
         Future<ArrayList<User>> future = UserDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<User>>(){
                     @Override
