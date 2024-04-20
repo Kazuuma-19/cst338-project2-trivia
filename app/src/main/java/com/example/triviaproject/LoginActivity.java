@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = WelcomeActivity.welcomeIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
