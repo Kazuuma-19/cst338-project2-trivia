@@ -21,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = "DAC_trivia";
     String uName = "";
     String uPassword = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding.accountDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         updateDisplay();
-        binding.register.setOnClickListener(new View.OnClickListener(){
+        binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInfoFromDisplay();
@@ -40,9 +41,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private void updateDisplay(){
+
+    private void updateDisplay() {
         ArrayList<User> allUsers = repository.getAllAccounts();
-        if(allUsers.isEmpty()) {
+        if (allUsers.isEmpty()) {
             binding.accountDisplayTextView.setText(R.string.no_accounts_found);
         }
 
@@ -52,17 +54,20 @@ public class RegisterActivity extends AppCompatActivity {
         }
         binding.accountDisplayTextView.setText(sb.toString());
     }
-    private void insertAccountInfo(){
-        if(uName.isEmpty() || uPassword.isEmpty()){
+
+    private void insertAccountInfo() {
+        if (uName.isEmpty() || uPassword.isEmpty()) {
             return;
         }
-        User account = new User(uName,uPassword);
+        User account = new User(uName, uPassword);
         repository.insertAccounts(account);
     }
-    public static Intent registerIntentFactory(Context context){
+
+    public static Intent registerIntentFactory(Context context) {
         return new Intent(context, RegisterActivity.class);
     }
-    private void getInfoFromDisplay(){
+
+    private void getInfoFromDisplay() {
         uName = binding.username.getText().toString();
         uPassword = binding.password.getText().toString();
     }

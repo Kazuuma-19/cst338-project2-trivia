@@ -22,17 +22,19 @@ public abstract class UserDatabase extends RoomDatabase {
     private static volatile UserDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    static UserDatabase getDatabase(final Context context){
-        if(INSTANCE == null){
+
+    static UserDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), UserDatabase.class, databaseName).fallbackToDestructiveMigration().addCallback(addDefaultValues).build();
         }
         return INSTANCE;
     }
-    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
+
+    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db){
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            Log.i(RegisterActivity.TAG,"database created");
+            Log.i(RegisterActivity.TAG, "database created");
         }
     };
 

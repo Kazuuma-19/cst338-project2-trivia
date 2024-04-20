@@ -15,13 +15,15 @@ public class UserRepository {
     private UserDAO accountDAO;
     private ArrayList<User> allAccs;
     private static UserRepository repository;
-    private UserRepository(Application application){
+
+    private UserRepository(Application application) {
         UserDatabase db = UserDatabase.getDatabase(application);
-        this.accountDAO =db.accountDAO();
+        this.accountDAO = db.accountDAO();
         this.allAccs = (ArrayList<User>) this.accountDAO.getAllRecords();
     }
-    public static UserRepository getRepository(Application application){
-        if(repository != null){
+
+    public static UserRepository getRepository(Application application) {
+        if (repository != null) {
             return repository;
         }
         Future<UserRepository> future = UserDatabase.databaseWriteExecutor.submit(
@@ -32,30 +34,32 @@ public class UserRepository {
                     }
                 }
         );
-        try{
+        try {
             return future.get();
-        }catch (InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             Log.d(RegisterActivity.TAG, "Problem getting account repository");
         }
         return null;
     }
-    public ArrayList<User> getAllAccounts(){
+
+    public ArrayList<User> getAllAccounts() {
         Future<ArrayList<User>> future = UserDatabase.databaseWriteExecutor.submit(
-                new Callable<ArrayList<User>>(){
+                new Callable<ArrayList<User>>() {
                     @Override
-                    public ArrayList<User> call() throws Exception{
+                    public ArrayList<User> call() throws Exception {
                         return (ArrayList<User>) accountDAO.getAllRecords();
                     }
                 }
         );
-        try{
+        try {
             return future.get();
-        }catch(InterruptedException | ExecutionException e){
+        } catch (InterruptedException | ExecutionException e) {
             Log.i(RegisterActivity.TAG, "Problem with getting account repository");
         }
         return null;
     }
-    public void insertAccounts(User account){
+
+    public void insertAccounts(User account) {
         UserDatabase.databaseWriteExecutor.execute(() ->
         {
             accountDAO.insert(account);
