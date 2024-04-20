@@ -3,6 +3,8 @@ package com.example.triviaproject.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.triviaproject.RegisterActivity;
 import com.example.triviaproject.database.entities.User;
 
@@ -64,5 +66,13 @@ public class UserRepository {
         {
             userDAO.insert(user);
         });
+    }
+
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
+
+    public LiveData<User> getUserByUserId(int loggedInUserId) {
+        return userDAO.getUserByUserId(loggedInUserId);
     }
 }
