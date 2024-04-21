@@ -20,4 +20,5 @@
     <string name="start_game">Start Game</string>
     <string name="login">Login</string>
     <string name="sign_in_as_admin">sign in as admin</string>
+    <string name="admin_options">admin options</string>
 </resources>

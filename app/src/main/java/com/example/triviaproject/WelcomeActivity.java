@@ -29,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private User user;
     private UserRepository repository;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,10 @@ public class WelcomeActivity extends AppCompatActivity {
             if (user != null) {
                 this.user = user;
                 invalidateOptionsMenu();
+
+                if (user.isAdmin()) {
+                    binding.adminPrivileges.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

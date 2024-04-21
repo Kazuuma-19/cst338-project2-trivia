@@ -32,18 +32,6 @@ public class LoginActivity extends AppCompatActivity {
                 verifyUser();
             }
         });
-        binding.loginAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(binding.username.getText().toString().equals("admin1") && binding.password.getText().toString().equals("admin1")){
-                    Intent intent = WelcomeActivity.welcomeIntentFactory(getApplicationContext(), 1);
-                    startActivity(intent);
-                }
-                else{
-                    toastMaker("invalid admin credentials");
-                }
-            }
-        });
     }
 
     private void verifyUser() {
