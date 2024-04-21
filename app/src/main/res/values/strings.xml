@@ -13,8 +13,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="sign_in">Sign in</string>
-    <string name="username">username</string>
+    <string name="username">Username</string>
     <string name="register">Register</string>
     <string name="accountinput">accountInput</string>
     <string name="no_accounts_found">No accounts found</string>
+    <string name="start_game">Start Game</string>
+    <string name="login">Login</string>
 </resources>

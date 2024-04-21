@@ -15,10 +15,12 @@ public class User {
     private int id;
     private String userName;
     private String password;
+    private boolean isAdmin;
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        this.isAdmin = false;
     }
 
     @NonNull
@@ -33,13 +35,13 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User trivia = (User) o;
-        return id == trivia.id && Objects.equals(userName, trivia.userName) && Objects.equals(password, trivia.password);
+        User user = (User) o;
+        return id == user.id && isAdmin == user.isAdmin && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, password);
+        return Objects.hash(id, userName, password, isAdmin);
     }
 
     public int getId() {
@@ -64,5 +66,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

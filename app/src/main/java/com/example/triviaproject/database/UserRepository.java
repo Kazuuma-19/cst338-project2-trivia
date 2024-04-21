@@ -3,6 +3,8 @@ package com.example.triviaproject.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.triviaproject.RegisterActivity;
 import com.example.triviaproject.database.entities.User;
 
@@ -12,14 +14,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class UserRepository {
-    private UserDAO accountDAO;
+    private final UserDAO userDAO;
     private ArrayList<User> allAccs;
     private static UserRepository repository;
 
     private UserRepository(Application application) {
         UserDatabase db = UserDatabase.getDatabase(application);
-        this.accountDAO = db.accountDAO();
-        this.allAccs = (ArrayList<User>) this.accountDAO.getAllRecords();
+        this.userDAO = db.userDAO();
+        this.allAccs = (ArrayList<User>) this.userDAO.getAllRecords();
     }
 
     public static UserRepository getRepository(Application application) {
@@ -47,7 +49,7 @@ public class UserRepository {
                 new Callable<ArrayList<User>>() {
                     @Override
                     public ArrayList<User> call() throws Exception {
-                        return (ArrayList<User>) accountDAO.getAllRecords();
+                        return (ArrayList<User>) userDAO.getAllRecords();
                     }
                 }
         );
@@ -59,10 +61,18 @@ public class UserRepository {
         return null;
     }
 
-    public void insertAccounts(User account) {
+    public void insertAccounts(User... user) {
         UserDatabase.databaseWriteExecutor.execute(() ->
         {
-            accountDAO.insert(account);
+            userDAO.insert(user);
         });
+    }
+
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
+
+    public LiveData<User> getUserByUserId(int loggedInUserId) {
+        return userDAO.getUserByUserId(loggedInUserId);
     }
 }
