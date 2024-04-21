@@ -1,11 +1,17 @@
 package com.example.triviaproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
@@ -20,6 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private ActivityWelcomeBinding binding;
     int loggedInUserId = -1;
+    private User user;
     private UserRepository repository;
 
     @Override
@@ -50,13 +57,13 @@ public class WelcomeActivity extends AppCompatActivity {
      * Get the user id from the shared preferences and the intent
      */
     private void loginUser() {
-        // Get the user id from the shared preferences if the user is already logged in
+        // Get the user id from the shared preferences
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE);
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-        if (loggedInUserId != LOGGED_OUT) {
+        if (loggedInUserId == LOGGED_OUT) {
             return;
         }
-        // Get the user id from the intent if the user is not logged in
+        // Get the user id from the intent
         loggedInUserId = getIntent().getIntExtra(WELCOME_ACTIVITY_USER_ID, LOGGED_OUT);
         if (loggedInUserId == LOGGED_OUT) {
             return;
@@ -66,9 +73,82 @@ public class WelcomeActivity extends AppCompatActivity {
         // Observe the user and wait for the user to be returned
         userObserver.observe(this, user -> {
             if (user != null) {
+                this.user = user;
                 invalidateOptionsMenu();
             }
         });
+    }
+
+    /**
+     * Create a menu to logout
+     *
+     * @param menu
+     * @return true
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    /**
+     * Add the user name to the menu
+     *
+     * @param menu
+     * @return true
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.logoutMenuItem);
+        item.setVisible(true);
+        item.setTitle(user.getUserName());
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                showLogoutDialog();
+                return false;
+            }
+        });
+
+
+        return true;
+    }
+
+    private void showLogoutDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = alertBuilder.create();
+
+        alertBuilder.setMessage("Logout?");
+
+        alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        });
+
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertBuilder.create().show();
+    }
+
+    private void logout() {
+        // Set the user id to -1 in the shared preferences
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
+        sharedPrefEditor.apply();
+
+        getIntent().putExtra(WELCOME_ACTIVITY_USER_ID, LOGGED_OUT);
+
+        Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+        startActivity(intent);
     }
 
     /**
