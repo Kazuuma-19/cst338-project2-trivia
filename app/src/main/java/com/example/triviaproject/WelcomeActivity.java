@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setContentView(R.layout.activity_welcome);
+        setContentView(view);
         repository = UserRepository.getRepository(getApplication());
 
         loginUser();
@@ -77,6 +77,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 this.user = user;
                 invalidateOptionsMenu();
 
+                binding.welcomeUserName.setText(user.getUserName());
+                // Add the admin button if the user is an admin
                 if (user.isAdmin()) {
                     binding.adminPrivileges.setVisibility(View.VISIBLE);
                 }
