@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        binding.username.setOnClickListener(new View.OnClickListener() {
+        binding.loginUsernameInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateDisplay();
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void getInfoFromDisplay() {
-        uName = binding.username.getText().toString();
-        uPassword = binding.password.getText().toString();
+        uName = binding.loginUsernameInput.getText().toString();
+        uPassword = binding.loginPasswordInput.getText().toString();
     }
 }

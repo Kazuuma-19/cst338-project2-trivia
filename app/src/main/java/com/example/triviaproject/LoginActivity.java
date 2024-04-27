@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         repository = TriviaRepository.getRepository(getApplication());
-        binding.login.setOnClickListener(new View.OnClickListener() {
+        binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verifyUser();
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyUser() {
-        String username = binding.username.getText().toString();
+        String username = binding.loginUsernameInput.getText().toString();
         if (username.isEmpty()) {
             toastMaker("Username cannot be empty");
             return;
@@ -45,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         // Observe the user and wait for the user to be returned
         userObserver.observe(this, user -> {
             if (user != null) {
-                String password = binding.password.getText().toString();
+                String password = binding.loginPasswordInput.getText().toString();
 
-                // Check if the password is correct
+                // Check if the loginPasswordInput is correct
                 if (password.equals(user.getPassword())) {
                     // Save the user id in shared preferences
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
@@ -61,14 +61,14 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     toastMaker("Invalid Password");
-                    binding.password.setSelection(0);
+                    binding.loginPasswordInput.setSelection(0);
                 }
             } else {
                 // User not found
                 toastMaker(String.format(
                         "%s is not a valid username", username
                 ));
-                binding.username.setSelection(0);
+                binding.loginUsernameInput.setSelection(0);
             }
         });
     }

@@ -41,7 +41,7 @@ public class LandingActivity extends AppCompatActivity {
         loginUser();
 
         if (loggedInUserId == -1) {
-            // Jump to the login activity if the user is not logged in
+            // Jump to the loginSignInButton activity if the user is not logged in
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }

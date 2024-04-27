@@ -27,7 +27,7 @@ public class User {
     @Override
     public String toString() {
         return "userName: " + userName + '\n' +
-                "password: " + password + '\n' +
+                "loginPasswordInput: " + password + '\n' +
                 "isAdmin: " + isAdmin + '\n' +
                 "=-=-=-=-=-=-=-=\n";
     }
