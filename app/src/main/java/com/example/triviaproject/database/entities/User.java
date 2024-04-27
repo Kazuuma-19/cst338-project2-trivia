@@ -28,6 +28,7 @@ public class User {
     public String toString() {
         return "userName: " + userName + '\n' +
                 "password: " + password + '\n' +
+                "isAdmin: " + isAdmin + '\n' +
                 "=-=-=-=-=-=-=-=\n";
     }
 
