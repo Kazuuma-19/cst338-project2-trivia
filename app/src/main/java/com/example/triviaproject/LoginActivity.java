@@ -51,13 +51,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.equals(user.getPassword())) {
                     // Save the user id in shared preferences
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
-                            WelcomeActivity.SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE
+                            LandingActivity.SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE
                     );
                     SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-                    sharedPrefEditor.putInt(WelcomeActivity.SHARED_PREFERENCE_USERID_VALUE, user.getId());
+                    sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, user.getId());
                     sharedPrefEditor.apply();
 
-                    Intent intent = WelcomeActivity.welcomeIntentFactory(getApplicationContext(), user.getId());
+                    Intent intent = LandingActivity.landingIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
                 } else {
                     toastMaker("Invalid Password");

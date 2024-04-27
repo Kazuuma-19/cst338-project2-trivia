@@ -17,14 +17,14 @@ import androidx.lifecycle.LiveData;
 
 import com.example.triviaproject.database.UserRepository;
 import com.example.triviaproject.database.entities.User;
-import com.example.triviaproject.databinding.ActivityWelcomeBinding;
+import com.example.triviaproject.databinding.ActivityLandingBinding;
 
-public class WelcomeActivity extends AppCompatActivity {
-    private static final String WELCOME_ACTIVITY_USER_ID = "com.example.triviaproject.WELCOME_ACTIVITY_USER_ID";
+public class LandingActivity extends AppCompatActivity {
+    private static final String LANDING_ACTIVITY_USER_ID = "com.example.triviaproject.LANDING_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.triviaproject.SHARED_PREFERENCE_USERID_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.triviaproject.SHARED_PREFERENCE_USERID_VALUE";
     private static final int LOGGED_OUT = -1;
-    private ActivityWelcomeBinding binding;
+    private ActivityLandingBinding binding;
     int loggedInUserId = -1;
     private User user;
     private UserRepository repository;
@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        binding = ActivityLandingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         repository = UserRepository.getRepository(getApplication());
@@ -46,7 +46,7 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        binding.welcomeStartGameButton.setOnClickListener(new View.OnClickListener() {
+        binding.landingStartGameButton.setOnClickListener(new View.OnClickListener() {
             // Start Game
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class WelcomeActivity extends AppCompatActivity {
             return;
         }
         // Get the user id from the intent
-        loggedInUserId = getIntent().getIntExtra(WELCOME_ACTIVITY_USER_ID, LOGGED_OUT);
+        loggedInUserId = getIntent().getIntExtra(LANDING_ACTIVITY_USER_ID, LOGGED_OUT);
         if (loggedInUserId == LOGGED_OUT) {
             return;
         }
@@ -77,7 +77,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 this.user = user;
                 invalidateOptionsMenu();
 
-                binding.welcomeUserName.setText(user.getUserName());
+                binding.landingUserName.setText(user.getUserName());
                 // Add the admin button if the user is an admin
                 if (user.isAdmin()) {
                     binding.adminPrivileges.setVisibility(View.VISIBLE);
@@ -152,22 +152,22 @@ public class WelcomeActivity extends AppCompatActivity {
         sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
         sharedPrefEditor.apply();
 
-        getIntent().putExtra(WELCOME_ACTIVITY_USER_ID, LOGGED_OUT);
+        getIntent().putExtra(LANDING_ACTIVITY_USER_ID, LOGGED_OUT);
 
         Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
         startActivity(intent);
     }
 
     /**
-     * Create an intent to start the welcome activity
+     * Create an intent to start the landing activity
      *
      * @param context
-     * @param userId  it is passed to the welcome activity from the another activity
+     * @param userId  it is passed to the landing activity from the another activity
      * @return intent
      */
-    public static Intent welcomeIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, WelcomeActivity.class);
-        intent.putExtra(WELCOME_ACTIVITY_USER_ID, userId);
+    public static Intent landingIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, LandingActivity.class);
+        intent.putExtra(LANDING_ACTIVITY_USER_ID, userId);
         return intent;
     }
 }
