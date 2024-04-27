@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.triviaproject.database.UserRepository;
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityLandingBinding;
 
@@ -27,7 +27,7 @@ public class LandingActivity extends AppCompatActivity {
     private ActivityLandingBinding binding;
     int loggedInUserId = -1;
     private User user;
-    private UserRepository repository;
+    private TriviaRepository repository;
 
 
     @Override
@@ -36,7 +36,7 @@ public class LandingActivity extends AppCompatActivity {
         binding = ActivityLandingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        repository = UserRepository.getRepository(getApplication());
+        repository = TriviaRepository.getRepository(getApplication());
 
         loginUser();
 

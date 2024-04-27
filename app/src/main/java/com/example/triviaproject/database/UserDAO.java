@@ -19,15 +19,15 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM " + UserDatabase.triviaTable + " ORDER BY id ASC")
+    @Query("SELECT * FROM " + TriviaDatabase.userTable + " ORDER BY id ASC")
     List<User> getAllRecords();
 
-    @Query("DELETE FROM " + UserDatabase.triviaTable)
+    @Query("DELETE FROM " + TriviaDatabase.userTable)
     void deleteAll();
 
-    @Query("SELECT * FROM " + UserDatabase.triviaTable + " WHERE username = :username")
+    @Query("SELECT * FROM " + TriviaDatabase.userTable + " WHERE username = :username")
     LiveData<User> getUserByUsername(String username);
 
-    @Query("SELECT * FROM " + UserDatabase.triviaTable + " WHERE id = :userId")
+    @Query("SELECT * FROM " + TriviaDatabase.userTable + " WHERE id = :userId")
     LiveData<User> getUserByUserId(int userId);
 }

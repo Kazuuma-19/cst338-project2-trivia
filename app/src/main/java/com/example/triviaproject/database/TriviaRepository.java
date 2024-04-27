@@ -13,26 +13,26 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class UserRepository {
+public class TriviaRepository {
     private final UserDAO userDAO;
-    private ArrayList<User> allAccs;
-    private static UserRepository repository;
+    private ArrayList<User> allUsers;
+    private static TriviaRepository repository;
 
-    private UserRepository(Application application) {
-        UserDatabase db = UserDatabase.getDatabase(application);
+    private TriviaRepository(Application application) {
+        TriviaDatabase db = TriviaDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
-        this.allAccs = (ArrayList<User>) this.userDAO.getAllRecords();
+        this.allUsers = (ArrayList<User>) this.userDAO.getAllRecords();
     }
 
-    public static UserRepository getRepository(Application application) {
+    public static TriviaRepository getRepository(Application application) {
         if (repository != null) {
             return repository;
         }
-        Future<UserRepository> future = UserDatabase.databaseWriteExecutor.submit(
-                new Callable<UserRepository>() {
+        Future<TriviaRepository> future = TriviaDatabase.databaseWriteExecutor.submit(
+                new Callable<TriviaRepository>() {
                     @Override
-                    public UserRepository call() throws Exception {
-                        return new UserRepository(application);
+                    public TriviaRepository call() throws Exception {
+                        return new TriviaRepository(application);
                     }
                 }
         );
@@ -44,8 +44,8 @@ public class UserRepository {
         return null;
     }
 
-    public ArrayList<User> getAllAccounts() {
-        Future<ArrayList<User>> future = UserDatabase.databaseWriteExecutor.submit(
+    public ArrayList<User> getAllUsers() {
+        Future<ArrayList<User>> future = TriviaDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<User>>() {
                     @Override
                     public ArrayList<User> call() throws Exception {
@@ -61,8 +61,8 @@ public class UserRepository {
         return null;
     }
 
-    public void insertAccounts(User... user) {
-        UserDatabase.databaseWriteExecutor.execute(() ->
+    public void insertUsers(User... user) {
+        TriviaDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.insert(user);
         });

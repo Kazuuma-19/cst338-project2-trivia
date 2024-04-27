@@ -10,13 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.triviaproject.database.UserRepository;
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    private UserRepository repository;
+    private TriviaRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        repository = UserRepository.getRepository(getApplication());
+        repository = TriviaRepository.getRepository(getApplication());
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
