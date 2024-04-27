@@ -9,10 +9,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".WelcomeActivity">
+    tools:context=".LandingActivity">
 
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/landingTextView"
         android:layout_width="213dp"
         android:layout_height="60dp"
         android:layout_marginTop="136dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/welcomeUserName"
+        android:id="@+id/landingUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -33,10 +33,10 @@
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/landingTextView" />
 
     <Button
-        android:id="@+id/welcomeStartGameButton"
+        android:id="@+id/landingStartGameButton"
         android:layout_width="134dp"
         android:layout_height="59dp"
         android:text="@string/start_game"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeUserName"
+        app:layout_constraintTop_toBottomOf="@+id/landingUserName"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
@@ -57,6 +57,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeStartGameButton"
+        app:layout_constraintTop_toBottomOf="@+id/landingStartGameButton"
         app:layout_constraintVertical_bias="0.2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

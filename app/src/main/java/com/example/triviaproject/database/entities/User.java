@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.triviaproject.database.UserDatabase;
+import com.example.triviaproject.database.TriviaDatabase;
 
 import java.util.Objects;
 
-@Entity(tableName = UserDatabase.triviaTable)
+@Entity(tableName = TriviaDatabase.userTable)
 public class User {
     @PrimaryKey(autoGenerate = true)
 

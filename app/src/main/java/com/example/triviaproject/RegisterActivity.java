@@ -8,7 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.triviaproject.database.UserRepository;
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityRegisterBinding;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
-    private UserRepository repository;
+    private TriviaRepository repository;
     public static final String TAG = "DAC_trivia";
     String uName = "";
     String uPassword = "";
@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        repository = UserRepository.getRepository(getApplication());
+        repository = TriviaRepository.getRepository(getApplication());
         binding.accountDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         updateDisplay();
@@ -35,12 +35,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInfoFromDisplay();
-                insertAccountInfo();
+                insertUserInfo();
                 updateDisplay();
             }
         });
 
-        binding.username.setOnClickListener(new View.OnClickListener() {
+        binding.loginUsernameInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateDisplay();
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateDisplay() {
-        ArrayList<User> allUsers = repository.getAllAccounts();
+        ArrayList<User> allUsers = repository.getAllUsers();
         if (allUsers.isEmpty()) {
             binding.accountDisplayTextView.setText(R.string.no_accounts_found);
         }
@@ -61,12 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
         binding.accountDisplayTextView.setText(sb.toString());
     }
 
-    private void insertAccountInfo() {
+    private void insertUserInfo() {
         if (uName.isEmpty() || uPassword.isEmpty()) {
             return;
         }
-        User account = new User(uName, uPassword);
-        repository.insertAccounts(account);
+        User user = new User(uName, uPassword);
+        repository.insertUsers(user);
     }
 
     public static Intent registerIntentFactory(Context context) {
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void getInfoFromDisplay() {
-        uName = binding.username.getText().toString();
-        uPassword = binding.password.getText().toString();
+        uName = binding.loginUsernameInput.getText().toString();
+        uPassword = binding.loginPasswordInput.getText().toString();
     }
 }

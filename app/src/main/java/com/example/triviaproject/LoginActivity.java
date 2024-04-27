@@ -10,13 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.triviaproject.database.UserRepository;
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    private UserRepository repository;
+    private TriviaRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        repository = UserRepository.getRepository(getApplication());
-        binding.login.setOnClickListener(new View.OnClickListener() {
+        repository = TriviaRepository.getRepository(getApplication());
+        binding.loginSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verifyUser();
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyUser() {
-        String username = binding.username.getText().toString();
+        String username = binding.loginUsernameInput.getText().toString();
         if (username.isEmpty()) {
             toastMaker("Username cannot be empty");
             return;
@@ -45,30 +45,30 @@ public class LoginActivity extends AppCompatActivity {
         // Observe the user and wait for the user to be returned
         userObserver.observe(this, user -> {
             if (user != null) {
-                String password = binding.password.getText().toString();
+                String password = binding.loginPasswordInput.getText().toString();
 
-                // Check if the password is correct
+                // Check if the loginPasswordInput is correct
                 if (password.equals(user.getPassword())) {
                     // Save the user id in shared preferences
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
-                            WelcomeActivity.SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE
+                            LandingActivity.SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE
                     );
                     SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-                    sharedPrefEditor.putInt(WelcomeActivity.SHARED_PREFERENCE_USERID_VALUE, user.getId());
+                    sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, user.getId());
                     sharedPrefEditor.apply();
 
-                    Intent intent = WelcomeActivity.welcomeIntentFactory(getApplicationContext(), user.getId());
+                    Intent intent = LandingActivity.landingIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
                 } else {
                     toastMaker("Invalid Password");
-                    binding.password.setSelection(0);
+                    binding.loginPasswordInput.setSelection(0);
                 }
             } else {
                 // User not found
                 toastMaker(String.format(
                         "%s is not a valid username", username
                 ));
-                binding.username.setSelection(0);
+                binding.loginUsernameInput.setSelection(0);
             }
         });
     }

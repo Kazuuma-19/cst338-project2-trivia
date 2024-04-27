@@ -17,14 +17,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        binding.button.setOnClickListener(new View.OnClickListener() {
+        binding.mainLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
                 startActivity(intent);
             }
         });
-        binding.button2.setOnClickListener(new View.OnClickListener() {
+        binding.mainRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = RegisterActivity.registerIntentFactory(getApplicationContext());
