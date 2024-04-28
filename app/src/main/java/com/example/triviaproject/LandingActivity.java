@@ -23,6 +23,7 @@ public class LandingActivity extends AppCompatActivity {
     private static final String LANDING_ACTIVITY_USER_ID = "com.example.triviaproject.LANDING_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.triviaproject.SHARED_PREFERENCE_USERID_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.triviaproject.SHARED_PREFERENCE_USERID_VALUE";
+    static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.triviaproject.SAVED_INSTANCE_STATE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private ActivityLandingBinding binding;
     int loggedInUserId = -1;
@@ -38,7 +39,7 @@ public class LandingActivity extends AppCompatActivity {
         setContentView(view);
         repository = TriviaRepository.getRepository(getApplication());
 
-        loginUser();
+        loginUser(savedInstanceState);
 
         if (loggedInUserId == -1) {
             // Jump to the loginSignInButton activity if the user is not logged in
@@ -57,15 +58,20 @@ public class LandingActivity extends AppCompatActivity {
     /**
      * Get the user id from the shared preferences and the intent
      */
-    private void loginUser() {
+    private void loginUser(Bundle savedInstanceState) {
         // Get the user id from the shared preferences
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE);
-        loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-        if (loggedInUserId == LOGGED_OUT) {
-            return;
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(SHARED_PREFERENCE_USERID_VALUE)) {
+            loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
+        }
+        // Get the user id from the saved instance state
+        if (loggedInUserId == LOGGED_OUT && savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)) {
+            loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
         }
         // Get the user id from the intent
-        loggedInUserId = getIntent().getIntExtra(LANDING_ACTIVITY_USER_ID, LOGGED_OUT);
+        if (loggedInUserId == LOGGED_OUT) {
+            loggedInUserId = getIntent().getIntExtra(LANDING_ACTIVITY_USER_ID, LOGGED_OUT);
+        }
         if (loggedInUserId == LOGGED_OUT) {
             return;
         }
@@ -73,17 +79,32 @@ public class LandingActivity extends AppCompatActivity {
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
         // Observe the user and wait for the user to be returned
         userObserver.observe(this, user -> {
-            if (user != null) {
-                this.user = user;
-                invalidateOptionsMenu();
+            this.user = user;
 
+            if (this.user != null) {
+                // Update the menu
+                invalidateOptionsMenu();
                 binding.landingUserName.setText(user.getUserName());
                 // Add the admin button if the user is an admin
                 if (user.isAdmin()) {
                     binding.adminPrivileges.setVisibility(View.VISIBLE);
                 }
+            } else {
+                // If the user is not found, logout
+                logout();
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
+        // Save the user id to the shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, loggedInUserId);
+        sharedPrefEditor.apply();
     }
 
     /**
