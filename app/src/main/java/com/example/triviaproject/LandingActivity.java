@@ -21,8 +21,6 @@ import com.example.triviaproject.databinding.ActivityLandingBinding;
 
 public class LandingActivity extends AppCompatActivity {
     private static final String LANDING_ACTIVITY_USER_ID = "com.example.triviaproject.LANDING_ACTIVITY_USER_ID";
-    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.triviaproject.SHARED_PREFERENCE_USERID_KEY";
-    static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.triviaproject.SHARED_PREFERENCE_USERID_VALUE";
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.triviaproject.SAVED_INSTANCE_STATE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private ActivityLandingBinding binding;
@@ -47,6 +45,8 @@ public class LandingActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        updateSharedPreference();
+
         binding.landingStartGameButton.setOnClickListener(new View.OnClickListener() {
             // Start Game
             @Override
@@ -56,14 +56,15 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the user id from the shared preferences and the intent
+     * Get the user id from the shared preferences, saved instance state, or intent
+     *
+     * @param savedInstanceState
      */
     private void loginUser(Bundle savedInstanceState) {
         // Get the user id from the shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(SHARED_PREFERENCE_USERID_VALUE)) {
-            loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
+
         // Get the user id from the saved instance state
         if (loggedInUserId == LOGGED_OUT && savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)) {
             loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
@@ -89,22 +90,21 @@ public class LandingActivity extends AppCompatActivity {
                 if (user.isAdmin()) {
                     binding.adminPrivileges.setVisibility(View.VISIBLE);
                 }
-            } else {
-                // If the user is not found, logout
-                logout();
             }
         });
     }
 
+    /**
+     * Save the user id to the saved instance state
+     * It is called when the activity is paused
+     *
+     * @param outState the saved instance state
+     */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
-        // Save the user id to the shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, loggedInUserId);
-        sharedPrefEditor.apply();
+        updateSharedPreference();
     }
 
     /**
@@ -138,8 +138,6 @@ public class LandingActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
         return true;
     }
 
@@ -167,16 +165,25 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        // Set the user id to -1 in the shared preferences
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-        sharedPrefEditor.apply();
+        loggedInUserId = LOGGED_OUT;
+        updateSharedPreference();
 
         getIntent().putExtra(LANDING_ACTIVITY_USER_ID, LOGGED_OUT);
 
         Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
         startActivity(intent);
+    }
+
+
+    /**
+     * Update user id in the shared preferences
+     * It stores the data permanently
+     */
+    private void updateSharedPreference() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
+        sharedPrefEditor.apply();
     }
 
     /**
