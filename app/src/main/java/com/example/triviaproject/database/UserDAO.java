@@ -20,7 +20,7 @@ public interface UserDAO {
     void delete(User user);
 
     @Query("SELECT * FROM " + TriviaDatabase.userTable + " ORDER BY id ASC")
-    List<User> getAllRecords();
+    List<User> getAllUsers();
 
     @Query("DELETE FROM " + TriviaDatabase.userTable)
     void deleteAll();

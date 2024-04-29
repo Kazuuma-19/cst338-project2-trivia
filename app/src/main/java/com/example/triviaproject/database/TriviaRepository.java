@@ -21,7 +21,7 @@ public class TriviaRepository {
     private TriviaRepository(Application application) {
         TriviaDatabase db = TriviaDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
-        this.allUsers = (ArrayList<User>) this.userDAO.getAllRecords();
+        this.allUsers = (ArrayList<User>) this.userDAO.getAllUsers();
     }
 
     public static TriviaRepository getRepository(Application application) {
@@ -49,7 +49,7 @@ public class TriviaRepository {
                 new Callable<ArrayList<User>>() {
                     @Override
                     public ArrayList<User> call() throws Exception {
-                        return (ArrayList<User>) userDAO.getAllRecords();
+                        return (ArrayList<User>) userDAO.getAllUsers();
                     }
                 }
         );

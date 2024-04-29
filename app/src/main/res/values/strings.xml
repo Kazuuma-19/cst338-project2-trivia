@@ -21,4 +21,6 @@
     <string name="login">Login</string>
     <string name="sign_in_as_admin">sign in as admin</string>
     <string name="admin_options">admin options</string>
+    <string name="preference_file_key">preferenceFileNameTrivia</string>
+    <string name="preference_userId_key">preferenceUserIdKeyTrivia</string>
 </resources>

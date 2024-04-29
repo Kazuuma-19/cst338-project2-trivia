@@ -2,7 +2,6 @@ package com.example.triviaproject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -49,14 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Check if the loginPasswordInput is correct
                 if (password.equals(user.getPassword())) {
-                    // Save the user id in shared preferences
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
-                            LandingActivity.SHARED_PREFERENCE_USERID_KEY, MODE_PRIVATE
-                    );
-                    SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-                    sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, user.getId());
-                    sharedPrefEditor.apply();
-
                     Intent intent = LandingActivity.landingIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
                 } else {
