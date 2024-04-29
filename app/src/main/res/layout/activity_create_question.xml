@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateQuestionActivity">
+
+
+    <EditText
+        android:id="@+id/editQuestion"
+        android:layout_width="400dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="Enter your question"
+        android:hint="@string/enter_your_question"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_questions" />
+
+    <TextView
+        android:id="@+id/create_questions"
+        android:layout_width="264dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/Create_Question"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/correctQuestion"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:autofillHints="Enter your answer"
+        android:hint="@string/enter_your_answer_a_b_or_c"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/createQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/C"
+        app:layout_constraintVertical_bias="0.494" />
+
+    <Button
+        android:id="@+id/createQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_question_actual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editQuestion"
+        app:layout_constraintVertical_bias="0.961" />
+
+    <Button
+        android:id="@+id/A"
+        android:layout_width="365dp"
+        android:layout_height="100dp"
+        android:text="@string/prompt_a"
+        app:layout_constraintBottom_toTopOf="@+id/createQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editQuestion"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <Button
+        android:id="@+id/B"
+        android:layout_width="365dp"
+        android:layout_height="100dp"
+        android:text="@string/prompt_b"
+        app:layout_constraintBottom_toTopOf="@+id/createQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/A"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <Button
+        android:id="@+id/C"
+        android:layout_width="365dp"
+        android:layout_height="100dp"
+        android:text="@string/prompt_c"
+        app:layout_constraintBottom_toTopOf="@+id/createQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/B"
+        app:layout_constraintVertical_bias="0.1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

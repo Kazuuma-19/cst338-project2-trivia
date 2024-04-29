@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity
+            android:name=".CreateQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminOptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".LandingActivity"
             android:exported="false" />
         <activity

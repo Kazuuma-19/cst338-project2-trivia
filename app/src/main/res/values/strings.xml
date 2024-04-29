@@ -21,4 +21,27 @@
     <string name="login">Login</string>
     <string name="sign_in_as_admin">sign in as admin</string>
     <string name="admin_options">admin options</string>
+    <string name="admin_mode">Admin Mode</string>
+    <string name="create_questions">Create Questions</string>
+    <string name="delete_questions">delete questions</string>
+    <string name="create_question">create question</string>
+    <string name="Create_Question">Create Question</string>
+    <string name="assign_answers">Assign Answers</string>
+    <string name="enter_your_question">Enter your question</string>
+    <string name="Create_Question_Confirm">create question</string>
+    <string name="correct_answer_a_b_or_c">Correct answer (A, B or C)</string>
+    <string name="prompt_for_a">prompt for A</string>
+    <string name="prompt_for_b">prompt for B</string>
+    <string name="prompt_for_c">prompt for C</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="create_question_actual">Create question</string>
+    <string name="prompt_a">prompt A</string>
+    <string name="prompt_b">prompt b</string>
+    <string name="prompt_c">prompt c</string>
+    <string name="enter_your_answer_a_b_or_c">Enter your answer (A, B or C)</string>
 </resources>

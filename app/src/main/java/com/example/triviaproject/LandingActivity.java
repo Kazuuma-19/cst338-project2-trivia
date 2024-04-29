@@ -53,6 +53,14 @@ public class LandingActivity extends AppCompatActivity {
             public void onClick(View v) {
             }
         });
+
+        binding.adminPrivileges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminOptionActivity.adminIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     /**
