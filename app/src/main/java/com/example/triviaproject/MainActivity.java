@@ -21,14 +21,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // Check if the user is already logged in. If so, jump to the landing page
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        int loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
-
-        if (loggedInUserId != LOGGED_OUT) {
-            Intent intent = LandingActivity.landingIntentFactory(getApplicationContext(), loggedInUserId);
-            startActivity(intent);
-        }
+        checkLoginStatus();
 
         binding.mainLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,5 +37,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Check if the user is already logged in. If so, jump to the landing page
+     */
+    private void checkLoginStatus() {
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
+
+        if (loggedInUserId != LOGGED_OUT) {
+            Intent intent = LandingActivity.landingIntentFactory(getApplicationContext(), loggedInUserId);
+            startActivity(intent);
+        }
     }
 }
