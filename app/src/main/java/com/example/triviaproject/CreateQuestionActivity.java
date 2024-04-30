@@ -5,49 +5,66 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.*;
+import android.widget.Toast;
+
+import com.example.triviaproject.database.QuestionRepository;
+import com.example.triviaproject.database.entities.Question;
+import com.example.triviaproject.database.entities.User;
+import com.example.triviaproject.databinding.ActivityCreateQuestionBinding;
 
 public class CreateQuestionActivity extends AppCompatActivity {
-
-    EditText question;
-    Button create, promptA, promptB, promptC;
+    private ActivityCreateQuestionBinding binding;
+    private QuestionRepository questionRepository;
+    String question = "", choiceA = "", choiceB = "", choiceC = "", correctChoice = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_question);
+        binding = ActivityCreateQuestionBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        questionRepository = QuestionRepository.getQuestionRepository(getApplication());
 
-        question = findViewById(R.id.editQuestion);
-        promptA = findViewById(R.id.A);
-        promptB = findViewById(R.id.B);
-        promptC = findViewById(R.id.C);
-        create = findViewById(R.id.createQuestion);
-
-        create.setOnClickListener(new View.OnClickListener() {
+        binding.createQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String questionText = question.getText().toString();
-                String promptAText = promptA.getText().toString();
-                String promptBText = promptB.getText().toString();
-                String promptCText = promptC.getText().toString();
-                if (!questionText.isEmpty()) {
-                    saveQuestion(questionText);
-                    Toast.makeText(CreateQuestionActivity.this, "Question saved!", Toast.LENGTH_SHORT).show();
-                    question.setText("");
-                } else {
-                    Toast.makeText(CreateQuestionActivity.this, "Please enter a question", Toast.LENGTH_SHORT).show();
-                }
+                getQuestionInfo();
+                saveQuestion();
+                cleanUp();
             }
         });
     }
 
-    private void saveQuestion(String questionText) {
-        // Implement saving mechanism here
-        // For example, save to a database or send to another activity
+    private void saveQuestion() {
+        if(question.isEmpty()){
+            Toast.makeText(this, "There's no question in there", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Question saved", Toast.LENGTH_SHORT).show();
+            Question newQuestion = new Question(question, choiceA, choiceB, choiceC, correctChoice);
+            questionRepository.insertQuestions(newQuestion);
+        }
+    }
+    
+    private void cleanUp(){
+        binding.editQuestion.setText("");
+        binding.A.setText("");
+        binding.B.setText("");
+        binding.C.setText("");
+        binding.correctQuestion.setText("");
     }
 
     public static Intent CreateQuestionIntentFactory(Context context) {
         return new Intent(context, CreateQuestionActivity.class);
+    }
+
+    private void getQuestionInfo(){
+        question = binding.editQuestion.getText().toString();
+        choiceA = binding.A.getText().toString();
+        choiceB = binding.B.getText().toString();
+        choiceC = binding.C.getText().toString();
+        correctChoice = binding.correctQuestion.getText().toString();
     }
 }

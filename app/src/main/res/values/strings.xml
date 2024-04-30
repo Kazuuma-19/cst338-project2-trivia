@@ -44,4 +44,6 @@
     <string name="prompt_b">prompt b</string>
     <string name="prompt_c">prompt c</string>
     <string name="enter_your_answer_a_b_or_c">Enter your answer (A, B or C)</string>
+    <string name="prompt_B">prompt B</string>
+    <string name="prompt_C">prompt C</string>
 </resources>
