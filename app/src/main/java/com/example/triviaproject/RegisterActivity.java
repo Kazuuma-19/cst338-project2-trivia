@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = "DAC_trivia";
     String uName = "";
     String uPassword = "";
+    boolean isAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class RegisterActivity extends AppCompatActivity {
                 getInfoFromDisplay();
                 insertUserInfo();
                 updateDisplay();
+                // Jump to the loginSignInButton activity after registering
+                Intent loginIntent = LoginActivity.loginIntentFactory(getApplicationContext());
+                startActivity(loginIntent);
             }
         });
 
@@ -65,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (uName.isEmpty() || uPassword.isEmpty()) {
             return;
         }
-        User user = new User(uName, uPassword);
+        User user = new User(uName, uPassword, isAdmin);
         repository.insertUsers(user);
     }
 
@@ -76,5 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void getInfoFromDisplay() {
         uName = binding.loginUsernameInput.getText().toString();
         uPassword = binding.loginPasswordInput.getText().toString();
+        isAdmin = binding.adminSwitch.isChecked();
+        Log.d("Register", "Username: " + uName + " Password: " + uPassword + " isAdmin: " + isAdmin);
     }
 }
