@@ -39,11 +39,10 @@ public abstract class TriviaDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
                 dao.deleteAll();
-                User admin = new User("admin1", "admin1");
-                admin.setAdmin(true);
+                User admin = new User("admin1", "admin1", true);
                 dao.insert(admin);
 
-                User testUser1 = new User("testUser1", "testUser1");
+                User testUser1 = new User("testUser1", "testUser1", false);
                 dao.insert(testUser1);
             });
         }

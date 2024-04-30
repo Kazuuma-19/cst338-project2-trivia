@@ -17,10 +17,10 @@ public class User {
     private String password;
     private boolean isAdmin;
 
-    public User(String userName, String password) {
+    public User(String userName, String password, boolean isAdmin) {
         this.userName = userName;
         this.password = password;
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
     }
 
     @NonNull
