@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,6 +81,5 @@ public class RegisterActivity extends AppCompatActivity {
         uName = binding.loginUsernameInput.getText().toString();
         uPassword = binding.loginPasswordInput.getText().toString();
         isAdmin = binding.adminSwitch.isChecked();
-        Log.d("Register", "Username: " + uName + " Password: " + uPassword + " isAdmin: " + isAdmin);
     }
 }
