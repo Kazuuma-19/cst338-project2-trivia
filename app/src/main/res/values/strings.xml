@@ -24,4 +24,8 @@
     <string name="preference_file_key">preferenceFileNameTrivia</string>
     <string name="preference_userId_key">preferenceUserIdKeyTrivia</string>
     <string name="admin">Admin</string>
+    <string name="question">Question</string>
+    <string name="user">User</string>
+    <string name="go_back">Go Back</string>
+    <string name="done">Done</string>
 </resources>
