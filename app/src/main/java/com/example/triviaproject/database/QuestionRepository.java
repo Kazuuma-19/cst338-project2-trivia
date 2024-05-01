@@ -6,9 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
-import com.example.triviaproject.RegisterActivity;
 import com.example.triviaproject.database.entities.Question;
-import com.example.triviaproject.database.entities.User;
+
 
 import java.util.ArrayList;
 import java.util.List;

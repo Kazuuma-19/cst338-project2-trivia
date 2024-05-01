@@ -3,7 +3,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.*;
 
 import com.example.triviaproject.database.entities.Question;
-import com.example.triviaproject.database.entities.User;
 
 import java.util.List;
 @Dao

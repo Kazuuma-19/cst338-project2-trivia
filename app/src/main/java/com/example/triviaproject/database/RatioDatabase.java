@@ -9,30 +9,29 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.triviaproject.database.entities.Question;
+import com.example.triviaproject.database.entities.Ratio;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Question.class}, version = 1, exportSchema = false)
-public abstract class QuestionDatabase extends RoomDatabase {
-    private static volatile QuestionDatabase INSTANCE;
+@Database(entities = {Ratio.class}, version = 1, exportSchema = false)
+public abstract class RatioDatabase extends RoomDatabase {
+    private static volatile RatioDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static QuestionDatabase getQuestionDatabase(final Context context) {
+    static RatioDatabase getRatioDatabase(final Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), QuestionDatabase.class, "question_database").addCallback(addDefaultValues).build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), RatioDatabase.class, "ratio_database").addCallback(addDefaultValues).build();
         }
         return INSTANCE;
     }
-
     private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            Log.i("questions", "database created");
+            Log.i("ratio", "database created");
         }
     };
-    public abstract QuestionDAO questionDao();
+    public abstract RatioDAO ratioDao();
 }
