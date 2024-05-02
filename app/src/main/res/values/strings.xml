@@ -46,4 +46,10 @@
     <string name="enter_your_answer_a_b_or_c">Enter your answer (A, B or C)</string>
     <string name="prompt_B">prompt B</string>
     <string name="prompt_C">prompt C</string>
+    <string name="question_prompt">question prompt</string>
+    <string name="prompt_b_goes_here">prompt B goes here</string>
+    <string name="prompt_a_goes_here">prompt a goes here</string>
+    <string name="prompt_A_goes_here">prompt A goes here</string>
+    <string name="prompt_c_goes_here">prompt C goes here</string>
+    <string name="submit">submit</string>
 </resources>

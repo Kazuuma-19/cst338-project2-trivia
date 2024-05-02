@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity
+            android:name=".PlayGameActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateQuestionActivity"
             android:exported="false" />
         <activity

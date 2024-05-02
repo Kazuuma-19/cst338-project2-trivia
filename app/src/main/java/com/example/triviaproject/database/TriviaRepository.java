@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.triviaproject.RegisterActivity;
+import com.example.triviaproject.database.entities.Question;
+import com.example.triviaproject.database.entities.Ratio;
 import com.example.triviaproject.database.entities.User;
 
 import java.util.ArrayList;
@@ -17,11 +19,21 @@ public class TriviaRepository {
     private final UserDAO userDAO;
     private ArrayList<User> allUsers;
     private static TriviaRepository repository;
+    private final QuestionDAO questionDao;
+    private ArrayList<Question> allQuestions;
+    private static TriviaRepository qRepository;
+    private final RatioDAO ratioDao;
+    private ArrayList<Ratio> allRatios;
+    private static TriviaRepository wlRepository;
 
     private TriviaRepository(Application application) {
         TriviaDatabase db = TriviaDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
         this.allUsers = (ArrayList<User>) this.userDAO.getAllUsers();
+        this.questionDao = db.questionDao();
+        this.allQuestions = (ArrayList<Question>) this.questionDao.getAllQuestions();
+        this.ratioDao = db.ratioDao();
+        this.allRatios = (ArrayList<Ratio>) this.ratioDao.getAllRatio();
     }
 
     public static TriviaRepository getRepository(Application application) {
@@ -43,6 +55,8 @@ public class TriviaRepository {
         }
         return null;
     }
+
+
 
     public ArrayList<User> getAllUsers() {
         Future<ArrayList<User>> future = TriviaDatabase.databaseWriteExecutor.submit(
@@ -75,4 +89,76 @@ public class TriviaRepository {
     public LiveData<User> getUserByUserId(int loggedInUserId) {
         return userDAO.getUserByUserId(loggedInUserId);
     }
+
+
+
+    public ArrayList<Question> getAllQuestions() {
+        Future<ArrayList<Question>> future = TriviaDatabase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<Question>>() {
+                    @Override
+                    public ArrayList<Question> call() throws Exception {
+                        return (ArrayList<Question>) questionDao.getAllQuestions();
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i("questions", "Problem with getting question repository");
+        }
+        return null;
+    }
+
+    public void insertQuestions(Question... question) {
+        TriviaDatabase.databaseWriteExecutor.execute(() ->
+        {
+            questionDao.insert(question);
+        });
+    }
+
+    public LiveData<Question> getQuestionId(int questionId) {
+        return questionDao.getQuestionId(questionId);
+    }
+
+
+
+    public ArrayList<Ratio> getAllRatio() {
+        Future<ArrayList<Ratio>> future = TriviaDatabase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<Ratio>>() {
+                    @Override
+                    public ArrayList<Ratio> call() throws Exception {
+                        return (ArrayList<Ratio>) ratioDao.getAllRatio();
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i("WLRatio", "Problem with getting scores");
+        }
+        return null;
+    }
+
+    public void insertRatio(Ratio ratio) {
+        TriviaDatabase.databaseWriteExecutor.execute(() -> {
+            ratioDao.insert(ratio);
+        });
+    }
+
+    public void incrementWins(String name) {
+        TriviaDatabase.databaseWriteExecutor.execute(() -> {
+            ratioDao.incrementWins(name);
+        });
+    }
+
+    public void incrementLosses(String name) {
+        TriviaDatabase.databaseWriteExecutor.execute(() -> {
+            ratioDao.incrementLosses(name);
+        });
+    }
+
+    public LiveData<Ratio> getRatioByName(String name) {
+        return ratioDao.getUserByUsername(name);
+    }
+
 }

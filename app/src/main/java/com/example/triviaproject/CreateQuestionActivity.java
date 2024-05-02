@@ -5,18 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.triviaproject.database.QuestionRepository;
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.Question;
-import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityCreateQuestionBinding;
 
 public class CreateQuestionActivity extends AppCompatActivity {
     private ActivityCreateQuestionBinding binding;
-    private QuestionRepository questionRepository;
+    private TriviaRepository questionRepository;
     String question = "", choiceA = "", choiceB = "", choiceC = "", correctChoice = "";
 
     @Override
@@ -25,7 +23,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         binding = ActivityCreateQuestionBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        questionRepository = QuestionRepository.getQuestionRepository(getApplication());
+        questionRepository = TriviaRepository.getRepository(getApplication());
 
         binding.createQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
