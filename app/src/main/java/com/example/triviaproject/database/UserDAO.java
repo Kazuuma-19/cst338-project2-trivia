@@ -30,4 +30,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + TriviaDatabase.userTable + " WHERE id = :userId")
     LiveData<User> getUserByUserId(int userId);
+
+    @Query("SELECT * FROM " + TriviaDatabase.userTable + " ORDER BY id ASC")
+    LiveData<List<User>> getAllUsersLiveData();
 }

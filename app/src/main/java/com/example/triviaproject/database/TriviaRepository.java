@@ -9,6 +9,7 @@ import com.example.triviaproject.RegisterActivity;
 import com.example.triviaproject.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -74,5 +75,9 @@ public class TriviaRepository {
 
     public LiveData<User> getUserByUserId(int loggedInUserId) {
         return userDAO.getUserByUserId(loggedInUserId);
+    }
+
+    public LiveData<List<User>> getAllUsersLiveData() {
+        return userDAO.getAllUsersLiveData();
     }
 }

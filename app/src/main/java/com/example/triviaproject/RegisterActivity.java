@@ -3,7 +3,6 @@ package com.example.triviaproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
 import com.example.triviaproject.databinding.ActivityRegisterBinding;
-
-import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
@@ -29,40 +26,17 @@ public class RegisterActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         repository = TriviaRepository.getRepository(getApplication());
-        binding.accountDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
-        updateDisplay();
         binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInfoFromDisplay();
                 insertUserInfo();
-                updateDisplay();
-                // Jump to the loginSignInButton activity after registering
+                // Jump to the login activity after registering the user
                 Intent loginIntent = LoginActivity.loginIntentFactory(getApplicationContext());
                 startActivity(loginIntent);
             }
         });
-
-        binding.loginUsernameInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDisplay();
-            }
-        });
-    }
-
-    private void updateDisplay() {
-        ArrayList<User> allUsers = repository.getAllUsers();
-        if (allUsers.isEmpty()) {
-            binding.accountDisplayTextView.setText(R.string.no_accounts_found);
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (User user : allUsers) {
-            sb.append(user);
-        }
-        binding.accountDisplayTextView.setText(sb.toString());
     }
 
     private void insertUserInfo() {

@@ -15,7 +15,7 @@
         android:id="@+id/loginUsernameInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="136dp"
         android:autofillHints="username"
         android:hint="@string/username"
         android:inputType="text"
@@ -60,19 +60,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="64dp"
         android:text="@string/register"
-        app:layout_constraintBottom_toTopOf="@id/accountDisplayTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminSwitch" />
-
-    <TextView
-        android:id="@+id/accountDisplayTextView"
-        android:layout_width="339dp"
-        android:layout_height="327dp"
-        android:text="@string/accountinput"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
