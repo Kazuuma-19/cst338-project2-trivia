@@ -33,6 +33,13 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.adminQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminOptionActivity.adminIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     public static Intent adminIntentFactory(Context context) {

@@ -36,7 +36,7 @@
         android:layout_height="112dp"
         android:layout_marginTop="148dp"
         android:gravity="center"
-        android:text="@string/admin_mode"
+        android:text="@string/question"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
