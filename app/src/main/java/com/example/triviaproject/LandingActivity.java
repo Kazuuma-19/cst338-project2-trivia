@@ -51,6 +51,8 @@ public class LandingActivity extends AppCompatActivity {
             // Start Game
             @Override
             public void onClick(View v) {
+                Intent intent = PlayGameActivity.gameIntentFactory(getApplicationContext(),loggedInUserId);
+                startActivity(intent);
             }
         });
 

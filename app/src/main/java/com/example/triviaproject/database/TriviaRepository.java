@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.triviaproject.RegisterActivity;
 import com.example.triviaproject.database.entities.Question;
@@ -161,4 +162,11 @@ public class TriviaRepository {
         return ratioDao.getUserByUsername(name);
     }
 
+    public LiveData<Integer> getRatioCountByUsername(String username) {
+        return ratioDao.getRatioCountByUsername(username);
+    }
+
+    public void deleteOneRatio(String username) {
+        ratioDao.deleteOneRatio(username);
+    }
 }

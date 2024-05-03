@@ -17,11 +17,14 @@ public interface RatioDAO {
     @Query("SELECT * FROM WLRatio" + " ORDER BY id ASC")
     List<Ratio> getAllRatio();
 
-    @Query("DELETE FROM " + "WLRatio")
-    void deleteAll();
+    @Query("DELETE FROM WLRatio WHERE name = :username")
+    void deleteOneRatio(String username);
 
-    @Query("SELECT * FROM " + "WLRatio" + " WHERE name = :username")
+    @Query("SELECT * FROM " + "WLRatio" + " WHERE name = :username LIMIT 1")
     LiveData<Ratio> getUserByUsername(String username);
+
+    @Query("SELECT * FROM " + "WLRatio" + " WHERE name = :userId")
+    LiveData<Ratio> getUserById(int userId);
 
     @Query("UPDATE WLRatio SET name = :username WHERE id = :userId")
     void updateField(int userId, String username);
@@ -31,5 +34,8 @@ public interface RatioDAO {
 
     @Query("UPDATE WLRatio SET losses = losses + 1 WHERE name = :name")
     void incrementLosses(String name);
+
+    @Query("SELECT COUNT(*) FROM WLRatio WHERE name = :username")
+    LiveData<Integer> getRatioCountByUsername(String username);
 
 }
