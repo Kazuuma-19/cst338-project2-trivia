@@ -37,19 +37,15 @@ public class PlayGameActivity extends AppCompatActivity {
                 if (user != null) {
                     name = user.getUserName();
                     // Check if the database already has a row with the same username
-                    LiveData<Ratio> existingRatioLiveData = repository.getRatioByName(name);
-                    existingRatioLiveData.observe(this, existingRatio -> {
+                    LiveData<Ratio> existingRatioData = repository.getRatioByName(name);
+                    existingRatioData.observe(this, existingRatio -> {
                         if (existingRatio == null) {
-                            // No existing ratio found, so insert a new one
                             Ratio newRatio = new Ratio(0, 0, name);
                             repository.insertRatio(newRatio);
                         } else {
-                            // Existing ratio found, do nothing or handle as needed
                             Toast.makeText(this, "Ratio already exists for this user", Toast.LENGTH_SHORT).show();
                         }
                     });
-                } else {
-                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -58,6 +54,8 @@ public class PlayGameActivity extends AppCompatActivity {
         loadQuestion(questionId);
 
         binding.submit.setOnClickListener(v -> {
+            updateRatio();
+            updateScreenElement();
             loadQuestion(++questionId);
         });
     }
@@ -70,14 +68,58 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                handleNoMoreQuestions();
+                NoMoreQuestions();
             }
         });
     }
-    private void handleNoMoreQuestions() {
+    private void NoMoreQuestions() {
         Toast.makeText(this, "No more questions available", Toast.LENGTH_SHORT).show();
     }
 
+    private void updateRatio() {
+        LiveData<Question> questionLiveData = repository.getQuestionId(questionId);
+        questionLiveData.observe(this, question -> {
+            if (question != null) {
+                String correctAnswerLetter = question.getCorrectChoice();
+                String selectedAnswer = getSelectedAnswer();
+                if (selectedAnswer != null && selectedAnswer.equals(correctAnswerLetter)) {
+                    repository.incrementWins(name);
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                } else {
+                    repository.incrementLosses(name);
+                    Toast.makeText(this, "Wrong.", Toast.LENGTH_SHORT).show();
+                }
+                binding.choiceA.setChecked(false);
+                binding.choiceB.setChecked(false);
+                binding.choiceC.setChecked(false);
+            }
+        });
+    }
+
+    private void updateScreenElement(){
+        LiveData<Integer> winsLiveData = repository.getWinsByUsername(name);
+        winsLiveData.observe(this, wins -> {
+            String winsText = "Corrects: " + wins;
+            binding.Corrects.setText(winsText);
+        });
+        LiveData<Integer> lossesLiveData = repository.getLossesByUsername(name);
+        lossesLiveData.observe(this, losses -> {
+            String lossesText = "Wrongs: " + losses;
+            binding.Wrongs.setText(lossesText);
+        });
+    }
+
+    private String getSelectedAnswer() {
+        if (binding.choiceA.isChecked()) {
+            return "A";
+        } else if (binding.choiceB.isChecked()) {
+            return "B";
+        } else if (binding.choiceC.isChecked()) {
+            return "C";
+        } else {
+            return null;
+        }
+    }
 
     public static Intent gameIntentFactory(Context context, int userId){
         Intent intent = new Intent(context, PlayGameActivity.class);

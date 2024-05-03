@@ -52,4 +52,6 @@
     <string name="prompt_A_goes_here">prompt A goes here</string>
     <string name="prompt_c_goes_here">prompt C goes here</string>
     <string name="submit">submit</string>
+    <string name="corrects">Corrects:</string>
+    <string name="wrongs">Wrongs:</string>
 </resources>

@@ -160,11 +160,11 @@ public class TriviaRepository {
         return ratioDao.getUserByUsername(name);
     }
 
-    public LiveData<Integer> getRatioCountByUsername(String username) {
-        return ratioDao.getRatioCountByUsername(username);
+    public LiveData<Integer> getWinsByUsername(String name){
+        return ratioDao.getWinsByUsername(name);
     }
 
-    public void deleteOneRatio(String username) {
-        ratioDao.deleteOneRatio(username);
+    public LiveData<Integer> getLossesByUsername(String name){
+        return ratioDao.getLossesByUsername(name);
     }
 }
