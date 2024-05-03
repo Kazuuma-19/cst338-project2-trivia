@@ -91,8 +91,6 @@ public class TriviaRepository {
         return userDAO.getUserByUserId(loggedInUserId);
     }
 
-
-
     public ArrayList<Question> getAllQuestions() {
         Future<ArrayList<Question>> future = TriviaDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<Question>>() {

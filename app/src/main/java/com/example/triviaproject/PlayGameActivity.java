@@ -36,7 +36,18 @@ public class PlayGameActivity extends AppCompatActivity {
             userLiveData.observe(this, user -> {
                 if (user != null) {
                     name = user.getUserName();
-                    handleRatioInsertion(name);
+                    // Check if the database already has a row with the same username
+                    LiveData<Ratio> existingRatioLiveData = repository.getRatioByName(name);
+                    existingRatioLiveData.observe(this, existingRatio -> {
+                        if (existingRatio == null) {
+                            // No existing ratio found, so insert a new one
+                            Ratio newRatio = new Ratio(0, 0, name);
+                            repository.insertRatio(newRatio);
+                        } else {
+                            // Existing ratio found, do nothing or handle as needed
+                            Toast.makeText(this, "Ratio already exists for this user", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
                 }
@@ -67,16 +78,6 @@ public class PlayGameActivity extends AppCompatActivity {
         Toast.makeText(this, "No more questions available", Toast.LENGTH_SHORT).show();
     }
 
-    private void handleRatioInsertion(String username) {
-        LiveData<Integer> rowCountLiveData = repository.getRatioCountByUsername(username);
-        rowCountLiveData.observe(this, count -> {
-            if (count != null && count >= 2) {
-                repository.deleteOneRatio(username);
-            }
-            Ratio newRatio = new Ratio(0, 0, username);
-            repository.insertRatio(newRatio);
-        });
-    }
 
     public static Intent gameIntentFactory(Context context, int userId){
         Intent intent = new Intent(context, PlayGameActivity.class);

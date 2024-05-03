@@ -27,7 +27,11 @@ public abstract class TriviaDatabase extends RoomDatabase {
 
     static TriviaDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TriviaDatabase.class, databaseName).fallbackToDestructiveMigration().addCallback(addDefaultValues).build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TriviaDatabase.class, databaseName)
+                    .fallbackToDestructiveMigration()
+                    .addCallback(addDefaultValues)
+                    .allowMainThreadQueries() // do not remove this
+                    .build();
         }
         return INSTANCE;
     }
