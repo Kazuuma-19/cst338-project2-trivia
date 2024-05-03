@@ -48,13 +48,11 @@ public class LandingActivity extends AppCompatActivity {
         updateSharedPreference();
 
         binding.landingStartGameButton.setOnClickListener(new View.OnClickListener() {
-            // Start Game
             @Override
             public void onClick(View v) {
             }
         });
         binding.adminPrivileges.setOnClickListener(new View.OnClickListener() {
-            // Admin Privileges
             @Override
             public void onClick(View v) {
                 Intent intent = AdminActivity.adminIntentFactory(getApplicationContext());

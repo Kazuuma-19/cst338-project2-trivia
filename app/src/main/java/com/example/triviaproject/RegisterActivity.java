@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getInfoFromDisplay();
                 insertUserInfo();
-                // Jump to the loginSignInButton activity after registering
+                // Jump to the login activity after registering the user
                 Intent loginIntent = LoginActivity.loginIntentFactory(getApplicationContext());
                 startActivity(loginIntent);
             }
