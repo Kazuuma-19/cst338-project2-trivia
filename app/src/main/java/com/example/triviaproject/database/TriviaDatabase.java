@@ -10,12 +10,14 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.triviaproject.RegisterActivity;
+import com.example.triviaproject.database.entities.Ratio;
 import com.example.triviaproject.database.entities.User;
+import com.example.triviaproject.database.entities.Question;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Question.class, Ratio.class}, version = 1, exportSchema = false)
 public abstract class TriviaDatabase extends RoomDatabase {
     private static final String databaseName = "trivia_database";
     public static final String userTable = "userTable";
@@ -25,7 +27,11 @@ public abstract class TriviaDatabase extends RoomDatabase {
 
     static TriviaDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TriviaDatabase.class, databaseName).fallbackToDestructiveMigration().addCallback(addDefaultValues).build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TriviaDatabase.class, databaseName)
+                    .fallbackToDestructiveMigration()
+                    .addCallback(addDefaultValues)
+                    .allowMainThreadQueries() // do not remove this
+                    .build();
         }
         return INSTANCE;
     }
@@ -49,4 +55,8 @@ public abstract class TriviaDatabase extends RoomDatabase {
     };
 
     public abstract UserDAO userDAO();
+
+    public abstract QuestionDAO questionDao();
+
+    public abstract RatioDAO ratioDao();
 }

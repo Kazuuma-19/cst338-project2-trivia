@@ -33,4 +33,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + TriviaDatabase.userTable + " ORDER BY id ASC")
     LiveData<List<User>> getAllUsersLiveData();
+
+    @Query("SELECT COUNT(*) FROM " + TriviaDatabase.userTable + " WHERE username = :username")
+    int countUsersByName(String username);//use this for duplication check on register
 }
