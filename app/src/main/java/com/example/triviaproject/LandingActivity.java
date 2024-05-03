@@ -50,6 +50,16 @@ public class LandingActivity extends AppCompatActivity {
         binding.landingStartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = PlayGameActivity.gameIntentFactory(getApplicationContext(),loggedInUserId);
+                startActivity(intent);
+            }
+        });
+
+        binding.adminPrivileges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminOptionActivity.adminIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
         binding.adminPrivileges.setOnClickListener(new View.OnClickListener() {
