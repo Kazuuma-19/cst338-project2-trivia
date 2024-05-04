@@ -59,4 +59,11 @@
     <string name="prompt_A_goes_here">prompt A goes here</string>
     <string name="prompt_c_goes_here">prompt C goes here</string>
     <string name="submit">submit</string>
+    <string name="delete_c">Delete C</string>
+    <string name="question_prompt_here">question prompt here</string>
+    <string name="previous">previous</string>
+    <string name="delete">delete</string>
+    <string name="next">next</string>
+    <string name="delete_b">Delete B</string>
+    <string name="delete_a">Delete A</string>
 </resources>
