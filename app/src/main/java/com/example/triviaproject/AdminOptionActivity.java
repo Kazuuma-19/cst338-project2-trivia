@@ -25,6 +25,14 @@ public class AdminOptionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.deleteQuestions.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = DeleteQuestionsActivity.DeleteQuestionIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        }));
     }
 
     public static Intent adminIntentFactory(Context context) {

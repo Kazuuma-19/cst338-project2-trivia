@@ -119,6 +119,9 @@ public class TriviaRepository {
         return questionDao.getQuestionId(questionId);
     }
 
+    public void deleteOneQuestion(int questionId){
+        questionDao.deleteOneQuestion(questionId);
+    }
 
 
     public ArrayList<Ratio> getAllRatio() {
@@ -167,4 +170,5 @@ public class TriviaRepository {
     public LiveData<Integer> getLossesByUsername(String name){
         return ratioDao.getLossesByUsername(name);
     }
+
 }

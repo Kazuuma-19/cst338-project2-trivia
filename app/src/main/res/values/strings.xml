@@ -54,4 +54,11 @@
     <string name="submit">submit</string>
     <string name="corrects">Corrects:</string>
     <string name="wrongs">Wrongs:</string>
+    <string name="question_prompt_here">question prompt here</string>
+    <string name="delete_a">Delete A</string>
+    <string name="delete_b">Delete B</string>
+    <string name="delete_c">Delete C</string>
+    <string name="previous">Previous</string>
+    <string name="delete">Delete</string>
+    <string name="next">Next</string>
 </resources>
