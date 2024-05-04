@@ -94,6 +94,10 @@ public class TriviaRepository {
         return userDAO.getAllUsersLiveData();
     }
 
+    public void deleteUserByUserId(int loggedInUserId) {
+        userDAO.deleteUserByUserId(loggedInUserId);
+    }
+
     public ArrayList<Question> getAllQuestions() {
         Future<ArrayList<Question>> future = TriviaDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<Question>>() {

@@ -59,4 +59,5 @@
     <string name="prompt_A_goes_here">prompt A goes here</string>
     <string name="prompt_c_goes_here">prompt C goes here</string>
     <string name="submit">submit</string>
+    <string name="delete_user">Delete User</string>
 </resources>

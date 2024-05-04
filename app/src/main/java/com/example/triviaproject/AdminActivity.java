@@ -11,6 +11,7 @@ import com.example.triviaproject.databinding.ActivityAdminBinding;
 
 public class AdminActivity extends AppCompatActivity {
     private ActivityAdminBinding binding;
+    private static final String ADMIN_ACTIVITY_USER_ID = "com.example.triviaproject.ADMIN_ACTIVITY_USER_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
