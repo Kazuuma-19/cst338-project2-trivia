@@ -43,9 +43,6 @@ public class PlayGameActivity extends AppCompatActivity {
                             // No existing ratio found, so insert a new one
                             Ratio newRatio = new Ratio(0, 0, name);
                             repository.insertRatio(newRatio);
-                        } else {
-                            // Existing ratio found, do nothing or handle as needed
-                            Toast.makeText(this, "Ratio already exists for this user", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
