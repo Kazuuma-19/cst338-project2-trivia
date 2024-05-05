@@ -26,7 +26,7 @@
             android:name=".CreateQuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminOptionActivity"
+            android:name=".QuestionActivity"
             android:exported="false" />
         <activity
             android:name=".LandingActivity"

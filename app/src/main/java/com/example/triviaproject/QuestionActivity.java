@@ -1,20 +1,21 @@
 package com.example.triviaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.triviaproject.databinding.ActivityAdminOptionBinding;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class AdminOptionActivity extends AppCompatActivity {
-    private ActivityAdminOptionBinding binding;
+import com.example.triviaproject.databinding.ActivityQuestionBinding;
+
+public class QuestionActivity extends AppCompatActivity {
+    private ActivityQuestionBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAdminOptionBinding.inflate(getLayoutInflater());
+        binding = ActivityQuestionBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -35,7 +36,7 @@ public class AdminOptionActivity extends AppCompatActivity {
         }));
     }
 
-    public static Intent adminIntentFactory(Context context) {
-        return new Intent(context, AdminOptionActivity.class);
+    public static Intent questionIntentFactory(Context context) {
+        return new Intent(context, QuestionActivity.class);
     }
 }

@@ -36,7 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.adminQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AdminOptionActivity.adminIntentFactory(getApplicationContext());
+                Intent intent = QuestionActivity.questionIntentFactory(getApplicationContext());
                 startActivity(intent);
             }
         });
