@@ -61,6 +61,7 @@ public class PlayGameActivity extends AppCompatActivity {
             loadQuestion(++questionId);
         });
     }
+
     private void updateRatio() {
         LiveData<Question> questionLiveData = repository.getQuestionByQuestionId(questionId);
         questionLiveData.observe(this, question -> {
@@ -80,6 +81,7 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         });
     }
+
     private void loadQuestion(int questionId) {
         LiveData<Question> questionLiveData = repository.getQuestionByQuestionId(questionId);
         questionLiveData.observe(this, question -> {
@@ -89,7 +91,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext(),userId);
+                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext(), userId);
                 startActivity(intent);
             }
         });

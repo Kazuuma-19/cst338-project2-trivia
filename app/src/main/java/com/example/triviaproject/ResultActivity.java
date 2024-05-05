@@ -39,13 +39,13 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    private void updateScreenElement(){
-        LiveData<Integer> winsLiveData = repository.getWinsByUsername(userId);
+    private void updateScreenElement() {
+        LiveData<Integer> winsLiveData = repository.getWinsByUserId(userId);
         winsLiveData.observe(this, wins -> {
             String winsText = "Corrects: " + wins;
             binding.wins.setText(winsText);
         });
-        LiveData<Integer> lossesLiveData = repository.getLossesByUsername(userId);
+        LiveData<Integer> lossesLiveData = repository.getLossesByUserId(userId);
         lossesLiveData.observe(this, losses -> {
             String lossesText = "Wrongs: " + losses;
             binding.losses.setText(lossesText);
