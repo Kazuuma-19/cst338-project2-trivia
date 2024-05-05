@@ -69,4 +69,6 @@
     <string name="result">Result</string>
     <string name="play_again">Play Again</string>
     <string name="delete_user">Delete User</string>
+    <string name="corrects">corrects</string>
+    <string name="losses">losses</string>
 </resources>

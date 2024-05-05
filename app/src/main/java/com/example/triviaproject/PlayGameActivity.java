@@ -43,9 +43,6 @@ public class PlayGameActivity extends AppCompatActivity {
                             // No existing ratio found, so insert a new one
                             Ratio newRatio = new Ratio(0, 0, name);
                             repository.insertRatio(newRatio);
-                        } else {
-                            // Existing ratio found, do nothing or handle as needed
-                            Toast.makeText(this, "Ratio already exists for this user", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -57,7 +54,28 @@ public class PlayGameActivity extends AppCompatActivity {
         loadQuestion(questionId);
 
         binding.submit.setOnClickListener(v -> {
+            updateRatio();
             loadQuestion(++questionId);
+        });
+    }
+
+    private void updateRatio() {
+        LiveData<Question> questionLiveData = repository.getQuestionByQuestionId(questionId);
+        questionLiveData.observe(this, question -> {
+            if (question != null) {
+                String correctAnswerLetter = question.getCorrectChoice();
+                String selectedAnswer = getSelectedAnswer();
+                if (selectedAnswer != null && selectedAnswer.equals(correctAnswerLetter)) {
+                    repository.incrementWins(name);
+                    Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                } else {
+                    repository.incrementLosses(name);
+                    Toast.makeText(this, "Wrong.", Toast.LENGTH_SHORT).show();
+                }
+                binding.choiceA.setChecked(false);
+                binding.choiceB.setChecked(false);
+                binding.choiceC.setChecked(false);
+            }
         });
     }
 
@@ -70,10 +88,22 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext());
+                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext(), userId);
                 startActivity(intent);
             }
         });
+    }
+
+    private String getSelectedAnswer() {
+        if (binding.choiceA.isChecked()) {
+            return "A";
+        } else if (binding.choiceB.isChecked()) {
+            return "B";
+        } else if (binding.choiceC.isChecked()) {
+            return "C";
+        } else {
+            return null;
+        }
     }
 
     public static Intent gameIntentFactory(Context context, int userId) {

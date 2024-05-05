@@ -42,4 +42,10 @@ public interface RatioDAO {
 
     @Query("SELECT COUNT(*) FROM WLRatio WHERE name = :username")
     LiveData<Integer> getRatioCountByUsername(String username);
+
+    @Query("SELECT wins FROM WLRatio WHERE id = :userId")
+    LiveData<Integer> getWinsById(int userId);
+
+    @Query("SELECT losses FROM WLRatio WHERE id = :userId")
+    LiveData<Integer> getLossesById(int userId);
 }

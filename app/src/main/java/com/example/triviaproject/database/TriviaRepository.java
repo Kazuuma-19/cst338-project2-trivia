@@ -129,7 +129,7 @@ public class TriviaRepository {
     public void deleteOneQuestion(int questionId) {
         questionDao.deleteOneQuestion(questionId);
     }
-    
+
     public ArrayList<Ratio> getAllRatio() {
         Future<ArrayList<Ratio>> future = TriviaDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<Ratio>>() {
@@ -175,5 +175,13 @@ public class TriviaRepository {
 
     public void deleteOneRatio(String username) {
         ratioDao.deleteOneRatio(username);
+    }
+
+    public LiveData<Integer> getWinsByUserId(int id) {
+        return ratioDao.getWinsById(id);
+    }
+
+    public LiveData<Integer> getLossesByUserId(int id) {
+        return ratioDao.getLossesById(id);
     }
 }
