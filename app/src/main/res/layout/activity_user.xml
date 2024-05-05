@@ -18,23 +18,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/userDoneButton"
-        android:layout_width="136dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTextView" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userListRecyclerView"
         android:layout_width="328dp"
         android:layout_height="328dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         tools:listitem="@layout/user_recycler_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDoneButton" />
+        app:layout_constraintTop_toBottomOf="@+id/userTextView" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="92dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userListRecyclerView">
+
+        <Button
+            android:id="@+id/userDoneButton"
+            android:layout_width="136dp"
+            android:layout_height="64dp"
+            android:text="@string/done"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/userDeleteButton"
+            android:layout_width="136dp"
+            android:layout_height="64dp"
+            android:text="@string/delete_user"
+            android:layout_weight="1" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
