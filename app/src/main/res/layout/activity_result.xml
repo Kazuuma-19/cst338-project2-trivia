@@ -8,6 +8,32 @@
     tools:context=".ResultActivity">
 
     <TextView
+        android:id="@+id/wins"
+        android:layout_width="213dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="344dp"
+        android:gravity="center"
+        android:hint="@string/corrects"
+        android:text=""
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/losses"
+        android:layout_width="213dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="472dp"
+        android:gravity="center"
+        android:hint="@string/losses"
+        android:text=""
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/resultTextView"
         android:layout_width="213dp"
         android:layout_height="60dp"

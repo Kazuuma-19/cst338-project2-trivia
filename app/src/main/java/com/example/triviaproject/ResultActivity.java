@@ -6,11 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
+import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.databinding.ActivityResultBinding;
 
 public class ResultActivity extends AppCompatActivity {
+
+    private static final String USER_ID = "com.example.triviaproject.USER_ID";
     private ActivityResultBinding binding;
+    private TriviaRepository repository;
+    private int userId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,11 @@ public class ResultActivity extends AppCompatActivity {
         binding = ActivityResultBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        repository = TriviaRepository.getRepository(getApplication());
+        userId = getIntent().getIntExtra(USER_ID, -1);
+
+        updateScreenElement();
 
         binding.resultPlayAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +39,22 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    public static Intent resultIntentFactory(Context context) {
-        return new Intent(context, ResultActivity.class);
+    private void updateScreenElement(){
+        LiveData<Integer> winsLiveData = repository.getWinsByUsername(userId);
+        winsLiveData.observe(this, wins -> {
+            String winsText = "Corrects: " + wins;
+            binding.wins.setText(winsText);
+        });
+        LiveData<Integer> lossesLiveData = repository.getLossesByUsername(userId);
+        lossesLiveData.observe(this, losses -> {
+            String lossesText = "Wrongs: " + losses;
+            binding.losses.setText(lossesText);
+        });
+    }
+
+    public static Intent resultIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, ResultActivity.class);
+        intent.putExtra(USER_ID, userId);
+        return intent;
     }
 }

@@ -176,4 +176,12 @@ public class TriviaRepository {
     public void deleteOneRatio(String username) {
         ratioDao.deleteOneRatio(username);
     }
+
+    public LiveData<Integer> getWinsByUsername(int id){
+        return ratioDao.getWinsById(id);
+    }
+
+    public LiveData<Integer> getLossesByUsername(int id){
+        return ratioDao.getLossesById(id);
+    }
 }
