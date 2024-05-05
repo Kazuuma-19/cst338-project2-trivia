@@ -1,12 +1,12 @@
 package com.example.triviaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.Question;
@@ -54,15 +54,15 @@ public class PlayGameActivity extends AppCompatActivity {
             });
         }
 
-
         loadQuestion(questionId);
 
         binding.submit.setOnClickListener(v -> {
             loadQuestion(++questionId);
         });
     }
+
     private void loadQuestion(int questionId) {
-        LiveData<Question> questionLiveData = repository.getQuestionId(questionId);
+        LiveData<Question> questionLiveData = repository.getQuestionByQuestionId(questionId);
         questionLiveData.observe(this, question -> {
             if (question != null) {
                 binding.questionTitle.setText(question.getQuestionText());
@@ -70,16 +70,13 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                handleNoMoreQuestions();
+                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
-    private void handleNoMoreQuestions() {
-        Toast.makeText(this, "No more questions available", Toast.LENGTH_SHORT).show();
-    }
 
-
-    public static Intent gameIntentFactory(Context context, int userId){
+    public static Intent gameIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, PlayGameActivity.class);
         intent.putExtra(USER_ID, userId);
         return intent;

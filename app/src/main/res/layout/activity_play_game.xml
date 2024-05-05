@@ -6,55 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".PlayGameActivity">
 
-    <RadioButton
-        android:id="@+id/choiceB"
-        android:layout_width="365dp"
-        android:layout_height="150dp"
-        android:hint="@string/prompt_b_goes_here"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choiceA"
-        app:layout_constraintVertical_bias="0.003" />
-
-    <RadioButton
-        android:id="@+id/choiceC"
-        android:layout_width="365dp"
-        android:layout_height="150dp"
-        android:hint="@string/prompt_c_goes_here"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choiceB"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <RadioButton
-        android:id="@+id/choiceA"
-        android:layout_width="365dp"
-        android:layout_height="150dp"
-        android:text=""
-        android:hint="@string/prompt_A_goes_here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTitle"
-        app:layout_constraintVertical_bias="0.029" />
-
     <TextView
         android:id="@+id/questionTitle"
         android:layout_width="264dp"
-        android:layout_height="112dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:gravity="center"
-        android:hint="@string/question_prompt"
+        tools:text="@string/question_prompt"
         android:text=""
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/playGameChoiceRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionTitle">
+
+        <RadioButton
+            android:id="@+id/choiceA"
+            android:layout_width="365dp"
+            android:layout_height="150dp"
+            tools:text="@string/prompt_A_goes_here"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/choiceB"
+            android:layout_width="365dp"
+            android:layout_height="150dp"
+            tools:text="@string/prompt_b_goes_here"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/choiceC"
+            android:layout_width="365dp"
+            android:layout_height="150dp"
+            tools:text="@string/prompt_c_goes_here"
+            android:text="" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/submit"
@@ -64,6 +57,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choiceC" />
-
+        app:layout_constraintTop_toBottomOf="@+id/playGameChoiceRadioGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

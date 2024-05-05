@@ -1,11 +1,16 @@
 package com.example.triviaproject.database;
-import androidx.lifecycle.LiveData;
-import androidx.room.*;
 
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
 import com.example.triviaproject.database.entities.Ratio;
 
 import java.util.List;
+
 @Dao
 public interface RatioDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -37,5 +42,4 @@ public interface RatioDAO {
 
     @Query("SELECT COUNT(*) FROM WLRatio WHERE name = :username")
     LiveData<Integer> getRatioCountByUsername(String username);
-
 }

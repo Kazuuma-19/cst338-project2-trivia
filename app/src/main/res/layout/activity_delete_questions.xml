@@ -4,89 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateQuestionActivity">
+    tools:context=".DeleteQuestionsActivity">
 
     <TextView
-        android:id="@+id/create_questions"
+        android:id="@+id/question_prompt_delete"
         android:layout_width="264dp"
         android:layout_height="112dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/Create_Question"
+        android:text=""
+        tools:text="@string/question_prompt_here"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editQuestion"
-        android:layout_width="400dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/enter_your_question"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_questions" />
-
-    <EditText
-        android:id="@+id/A"
+        android:id="@+id/bDelete"
         android:layout_width="365dp"
         android:layout_height="100dp"
-        android:hint="@string/prompt_a"
+        tools:text="@string/delete_a"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editQuestion" />
+        app:layout_constraintTop_toBottomOf="@+id/question_prompt_delete" />
 
     <EditText
-        android:id="@+id/B"
+        android:id="@+id/aDelete"
         android:layout_width="365dp"
         android:layout_height="100dp"
-        android:hint="@string/prompt_B"
+        tools:text="@string/delete_b"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/A" />
+        app:layout_constraintTop_toBottomOf="@+id/bDelete" />
 
     <EditText
-        android:id="@+id/C"
+        android:id="@+id/cDelete"
         android:layout_width="365dp"
         android:layout_height="100dp"
-        android:hint="@string/prompt_C"
+        tools:text="@string/delete_c"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/B" />
-
-    <EditText
-        android:id="@+id/correctQuestion"
-        android:layout_width="400dp"
-        android:layout_height="50dp"
-        android:hint="@string/enter_your_answer_a_b_or_c"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/C" />
+        app:layout_constraintTop_toBottomOf="@+id/aDelete" />
 
     <LinearLayout
-        android:layout_width="336dp"
+        android:id="@+id/deleteQuestionPrevNext"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correctQuestion">
+        app:layout_constraintTop_toBottomOf="@+id/cDelete">
 
         <Button
-            android:id="@+id/questionDoneButton"
-            android:layout_width="136dp"
+            android:id="@+id/Prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previous"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteQuestionPrevNext">
+
+        <Button
+            android:id="@+id/deleteQuestionDoneButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/done"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/createQuestion"
-            android:layout_width="136dp"
+            android:id="@+id/Del"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/create_question_actual" />
+            android:text="@string/delete"
+            android:layout_weight="1" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

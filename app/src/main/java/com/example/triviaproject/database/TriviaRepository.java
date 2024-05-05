@@ -122,11 +122,14 @@ public class TriviaRepository {
         });
     }
 
-    public LiveData<Question> getQuestionId(int questionId) {
-        return questionDao.getQuestionId(questionId);
+    public LiveData<Question> getQuestionByQuestionId(int questionId) {
+        return questionDao.getQuestionByQuestionId(questionId);
     }
 
-
+    public void deleteOneQuestion(int questionId) {
+        questionDao.deleteOneQuestion(questionId);
+    }
+    
     public ArrayList<Ratio> getAllRatio() {
         Future<ArrayList<Ratio>> future = TriviaDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<Ratio>>() {

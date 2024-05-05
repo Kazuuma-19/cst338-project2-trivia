@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteQuestionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserActivity"
             android:exported="false" />
         <activity
@@ -23,7 +29,7 @@
             android:name=".CreateQuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminOptionActivity"
+            android:name=".QuestionActivity"
             android:exported="false" />
         <activity
             android:name=".LandingActivity"
