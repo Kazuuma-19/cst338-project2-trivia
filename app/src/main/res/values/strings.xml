@@ -66,4 +66,6 @@
     <string name="next">next</string>
     <string name="delete_b">Delete B</string>
     <string name="delete_a">Delete A</string>
+    <string name="result">Result</string>
+    <string name="play_again">Play Again</string>
 </resources>

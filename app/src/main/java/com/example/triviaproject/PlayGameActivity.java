@@ -70,13 +70,10 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                handleNoMoreQuestions();
+                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-    }
-
-    private void handleNoMoreQuestions() {
-        Toast.makeText(this, "No more questions available", Toast.LENGTH_SHORT).show();
     }
 
     public static Intent gameIntentFactory(Context context, int userId) {
