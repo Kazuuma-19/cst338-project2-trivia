@@ -8,32 +8,6 @@
     tools:context=".ResultActivity">
 
     <TextView
-        android:id="@+id/wins"
-        android:layout_width="213dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="344dp"
-        android:gravity="center"
-        android:hint="@string/corrects"
-        android:text=""
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/losses"
-        android:layout_width="213dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="472dp"
-        android:gravity="center"
-        android:hint="@string/losses"
-        android:text=""
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/resultTextView"
         android:layout_width="213dp"
         android:layout_height="60dp"
@@ -45,13 +19,98 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/resultCurrentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/current_score"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultTextView" />
+
+    <LinearLayout
+        android:id="@+id/currentScoreLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultCurrentTextView">
+
+        <TextView
+            android:id="@+id/currentWins"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/corrects"
+            android:text=""
+            android:textSize="24sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/currentLosses"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/losses"
+            android:text=""
+            android:textSize="24sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resultTotalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:text="@string/total_score"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentScoreLinearLayout" />
+
+    <LinearLayout
+        android:id="@+id/totalScoreLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultTotalTextView">
+
+        <TextView
+            android:id="@+id/wins"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/corrects"
+            android:text=""
+            android:textSize="24sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/losses"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/losses"
+            android:text=""
+            android:textSize="24sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/resultPlayAgainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/play_again"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/totalScoreLinearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

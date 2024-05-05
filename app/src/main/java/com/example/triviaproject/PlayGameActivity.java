@@ -21,6 +21,8 @@ public class PlayGameActivity extends AppCompatActivity {
     private int userId = -1;
     private int questionId = 1;
     private String name = "";
+    private int corrects = 0;
+    private int wrongs = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +69,11 @@ public class PlayGameActivity extends AppCompatActivity {
                 String selectedAnswer = getSelectedAnswer();
                 if (selectedAnswer != null && selectedAnswer.equals(correctAnswerLetter)) {
                     repository.incrementWins(name);
+                    corrects++;
                     Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 } else {
                     repository.incrementLosses(name);
+                    wrongs++;
                     Toast.makeText(this, "Wrong.", Toast.LENGTH_SHORT).show();
                 }
                 binding.choiceA.setChecked(false);
@@ -88,7 +92,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 binding.choiceB.setText(question.getChoiceB());
                 binding.choiceC.setText(question.getChoiceC());
             } else {
-                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext(), userId);
+                Intent intent = ResultActivity.resultIntentFactory(getApplicationContext(), userId, corrects, wrongs);
                 startActivity(intent);
             }
         });

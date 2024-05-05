@@ -14,6 +14,8 @@ import com.example.triviaproject.databinding.ActivityResultBinding;
 public class ResultActivity extends AppCompatActivity {
 
     private static final String USER_ID = "com.example.triviaproject.USER_ID";
+    private static final String CURRENT_CORRECTS = "com.example.triviaproject.CURRENT_CORRECTS";
+    private static final String CURRENT_WRONGS = "com.example.triviaproject.CURRENT_WRONGS";
     private ActivityResultBinding binding;
     private TriviaRepository repository;
     private int userId = -1;
@@ -39,7 +41,18 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    private void updateCurrentScore() {
+        int currentCorrects = getIntent().getIntExtra(CURRENT_CORRECTS, 0);
+        int currentWrongs = getIntent().getIntExtra(CURRENT_WRONGS, 0);
+        String currentCorrectsText = "Corrects: " + currentCorrects;
+        String currentWrongsText = "Wrongs: " + currentWrongs;
+        binding.currentWins.setText(currentCorrectsText);
+        binding.currentLosses.setText(currentWrongsText);
+    }
+
     private void updateScreenElement() {
+        updateCurrentScore();
+        // Set the total score
         LiveData<Integer> winsLiveData = repository.getWinsByUserId(userId);
         winsLiveData.observe(this, wins -> {
             String winsText = "Corrects: " + wins;
@@ -52,9 +65,11 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    public static Intent resultIntentFactory(Context context, int userId) {
+    public static Intent resultIntentFactory(Context context, int userId, int corrects, int wrongs) {
         Intent intent = new Intent(context, ResultActivity.class);
         intent.putExtra(USER_ID, userId);
+        intent.putExtra(CURRENT_CORRECTS, corrects);
+        intent.putExtra(CURRENT_WRONGS, wrongs);
         return intent;
     }
 }
