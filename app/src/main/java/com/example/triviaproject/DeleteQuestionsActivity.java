@@ -33,6 +33,10 @@ public class DeleteQuestionsActivity extends AppCompatActivity {
         binding.Del.setOnClickListener(v -> {
             deleteQuestion(questionId);
         });
+        binding.deleteQuestionDoneButton.setOnClickListener(v -> {
+            Intent intent = AdminActivity.adminIntentFactory(getApplicationContext());
+            startActivity(intent);
+        });
     }
 
     private void loadQuestion(int questionId) {
