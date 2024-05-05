@@ -1,6 +1,8 @@
 package com.example.triviaproject.database.entities;
+
 import androidx.annotation.NonNull;
-import androidx.room.*;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
@@ -8,7 +10,6 @@ import java.util.Objects;
 public class Question {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String questionText;
     private String choiceA;
     private String choiceB;

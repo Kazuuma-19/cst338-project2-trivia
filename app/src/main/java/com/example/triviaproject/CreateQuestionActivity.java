@@ -1,12 +1,12 @@
 package com.example.triviaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.Question;
@@ -30,23 +30,33 @@ public class CreateQuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 getQuestionInfo();
                 saveQuestion();
-                cleanUp();
+            }
+        });
+        binding.questionDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AdminActivity.adminIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
 
     private void saveQuestion() {
-        if(question.isEmpty()){
+        if (question.isEmpty()) {
             Toast.makeText(this, "There's no question in there", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else if (choiceA.isEmpty() || choiceB.isEmpty() || choiceC.isEmpty()) {
+            Toast.makeText(this, "There's no choice in there", Toast.LENGTH_SHORT).show();
+        } else if (correctChoice.isEmpty()) {
+            Toast.makeText(this, "There's no correct choice in there", Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(this, "Question saved", Toast.LENGTH_SHORT).show();
             Question newQuestion = new Question(question, choiceA, choiceB, choiceC, correctChoice);
             questionRepository.insertQuestions(newQuestion);
+            cleanUp();
         }
     }
-    
-    private void cleanUp(){
+
+    private void cleanUp() {
         binding.editQuestion.setText("");
         binding.A.setText("");
         binding.B.setText("");
@@ -58,7 +68,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         return new Intent(context, CreateQuestionActivity.class);
     }
 
-    private void getQuestionInfo(){
+    private void getQuestionInfo() {
         question = binding.editQuestion.getText().toString();
         choiceA = binding.A.getText().toString();
         choiceB = binding.B.getText().toString();

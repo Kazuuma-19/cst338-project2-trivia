@@ -1,11 +1,11 @@
 package com.example.triviaproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.Question;
@@ -36,7 +36,7 @@ public class DeleteQuestionsActivity extends AppCompatActivity {
     }
 
     private void loadQuestion(int questionId) {
-        LiveData<Question> questionLiveData = repository.getQuestionId(questionId);
+        LiveData<Question> questionLiveData = repository.getQuestionByQuestionId(questionId);
         questionLiveData.observe(this, question -> {
             if (question != null) {
                 binding.questionPromptDelete.setText(question.getQuestionText());
