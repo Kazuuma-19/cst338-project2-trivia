@@ -25,6 +25,9 @@ public interface UserDAO {
     @Query("DELETE FROM " + TriviaDatabase.userTable)
     void deleteAll();
 
+    @Query("DELETE FROM " + TriviaDatabase.userTable + " WHERE id = :userId")
+    void deleteUserByUserId(int userId);
+
     @Query("SELECT * FROM " + TriviaDatabase.userTable + " WHERE username = :username")
     LiveData<User> getUserByUsername(String username);
 
