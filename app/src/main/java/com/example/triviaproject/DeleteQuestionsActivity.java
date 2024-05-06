@@ -3,6 +3,7 @@ package com.example.triviaproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -53,6 +54,7 @@ public class DeleteQuestionsActivity extends AppCompatActivity {
 
     private void deleteQuestion(int questionId) {
         repository.deleteOneQuestion(questionId);
+        Toast.makeText(this, "Delete Question", Toast.LENGTH_SHORT).show();
     }
 
     public static Intent DeleteQuestionIntentFactory(Context context) {
