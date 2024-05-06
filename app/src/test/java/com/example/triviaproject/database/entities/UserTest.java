@@ -1,7 +1,5 @@
 package com.example.triviaproject.database.entities;
 
-import com.example.triviaproject.database.entities.User;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
