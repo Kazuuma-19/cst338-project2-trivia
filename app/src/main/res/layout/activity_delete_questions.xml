@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
     tools:context=".DeleteQuestionsActivity">
 
     <TextView
@@ -21,7 +23,7 @@
 
     <EditText
         android:id="@+id/bDelete"
-        android:layout_width="365dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         tools:text="@string/delete_a"
         android:text=""
@@ -31,7 +33,7 @@
 
     <EditText
         android:id="@+id/aDelete"
-        android:layout_width="365dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         tools:text="@string/delete_b"
         android:text=""
@@ -41,7 +43,7 @@
 
     <EditText
         android:id="@+id/cDelete"
-        android:layout_width="365dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         tools:text="@string/delete_c"
         android:text=""
@@ -51,7 +53,7 @@
 
     <LinearLayout
         android:id="@+id/deleteQuestionPrevNext"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
@@ -61,21 +63,25 @@
 
         <Button
             android:id="@+id/Prev"
-            android:layout_width="wrap_content"
+            android:layout_width="248dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="24dp"
+            android:textSize="16sp"
             android:text="@string/previous"
             android:layout_weight="1" />
 
         <Button
             android:id="@+id/Next"
-            android:layout_width="wrap_content"
+            android:layout_width="248dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="24dp"
+            android:textSize="16sp"
             android:text="@string/next"
             android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
@@ -85,15 +91,19 @@
 
         <Button
             android:id="@+id/deleteQuestionDoneButton"
-            android:layout_width="wrap_content"
+            android:layout_width="248dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="24dp"
+            android:textSize="16sp"
             android:text="@string/done"
             android:layout_weight="1" />
 
         <Button
             android:id="@+id/Del"
-            android:layout_width="wrap_content"
+            android:layout_width="248dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="24dp"
+            android:textSize="16sp"
             android:text="@string/delete"
             android:layout_weight="1" />
     </LinearLayout>

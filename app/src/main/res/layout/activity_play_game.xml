@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
     tools:context=".PlayGameActivity">
 
     <TextView
         android:id="@+id/questionTitle"
         android:layout_width="264dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         tools:text="@string/question_prompt"
         android:text=""
@@ -21,38 +23,50 @@
 
     <RadioGroup
         android:id="@+id/playGameChoiceRadioGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTitle">
 
         <RadioButton
             android:id="@+id/choiceA"
-            android:layout_width="365dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="24dp"
+            android:textSize="20sp"
             tools:text="@string/prompt_A_goes_here"
             android:text="" />
 
         <RadioButton
             android:id="@+id/choiceB"
-            android:layout_width="365dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="24dp"
+            android:textSize="20sp"
             tools:text="@string/prompt_b_goes_here"
             android:text="" />
 
         <RadioButton
             android:id="@+id/choiceC"
-            android:layout_width="365dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="24dp"
+            android:textSize="20sp"
             tools:text="@string/prompt_c_goes_here"
             android:text="" />
     </RadioGroup>
 
     <Button
         android:id="@+id/submit"
-        android:layout_width="wrap_content"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -4,42 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
     tools:context=".QuestionActivity">
-
-    <Button
-        android:id="@+id/create_questions"
-        android:layout_width="255dp"
-        android:layout_height="75dp"
-        android:text="@string/create_questions"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_mode"
-        app:layout_constraintVertical_bias="0.217" />
-
-    <Button
-        android:id="@+id/delete_questions"
-        android:layout_width="255dp"
-        android:layout_height="75dp"
-        android:text="@string/delete_questions"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_mode" />
 
     <TextView
         android:id="@+id/admin_mode"
-        android:layout_width="264dp"
-        android:layout_height="112dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
         android:gravity="center"
         android:text="@string/question"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/create_questions"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
+        android:layout_marginTop="72dp"
+        android:text="@string/create_questions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_mode" />
+
+    <Button
+        android:id="@+id/delete_questions"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="24dp"
+        android:text="@string/delete_questions"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_questions" />
 </androidx.constraintlayout.widget.ConstraintLayout>
