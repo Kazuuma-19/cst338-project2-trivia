@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
     tools:context=".AdminActivity">
 
     <TextView
@@ -21,8 +23,10 @@
 
     <Button
         android:id="@+id/adminQuestionButton"
-        android:layout_width="136dp"
-        android:layout_height="64dp"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
         android:layout_marginTop="72dp"
         android:text="@string/question"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +35,10 @@
 
     <Button
         android:id="@+id/adminUserButton"
-        android:layout_width="136dp"
-        android:layout_height="64dp"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
         android:layout_marginTop="32dp"
         android:text="@string/user"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,13 +47,13 @@
 
     <Button
         android:id="@+id/adminGoBackButton"
-        android:layout_width="136dp"
-        android:layout_height="64dp"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
         android:layout_marginTop="32dp"
         android:text="@string/go_back"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminUserButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/adminUserButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

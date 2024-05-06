@@ -5,13 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
     tools:context=".ResultActivity">
 
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="213dp"
         android:layout_height="60dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/result"
         android:textSize="40sp"
@@ -23,7 +25,7 @@
         android:id="@+id/resultCurrentTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="56dp"
         android:text="@string/current_score"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,10 +108,12 @@
 
     <Button
         android:id="@+id/resultPlayAgainButton"
-        android:layout_width="wrap_content"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="24dp"
+        android:textSize="16sp"
         android:text="@string/play_again"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalScoreLinearLayout" />
