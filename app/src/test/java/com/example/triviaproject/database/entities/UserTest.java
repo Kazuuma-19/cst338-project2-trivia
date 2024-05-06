@@ -1,16 +1,6 @@
-package com.example.triviaproject;
+package com.example.triviaproject.database.entities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-
-import com.example.triviaproject.database.TriviaRepository;
 import com.example.triviaproject.database.entities.User;
-import com.example.triviaproject.databinding.ActivityRegisterBinding;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +16,7 @@ import static org.junit.Assert.assertNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class UserTest {
     User u1 = null;
     String defaultUserName = "Sample";
     String defaultPassWord = "Text";
